@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
   prepareHeaders: (headers, {getState}) => {
     const state = getState() as RootState;
-    const token = state.auth.token;
+    const token = state.auth.accessToken;
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -37,4 +37,4 @@ export const api = createApi({
   }),
 });
 
-export const {useSignupMutation, useSigninMutation} = api
+export const {useSignupMutation, useSigninMutation} = api;

@@ -5,7 +5,7 @@ import {AuthState} from './models';
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    token: '',
+    accessToken: '',
     user: DefaultUser,
   },
   reducers: {

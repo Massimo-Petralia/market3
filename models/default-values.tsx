@@ -12,6 +12,7 @@ export const DefaultUser: User = {
   id: undefined,
   //accessTokken: '',
   name: '',
+  favoriteTheme: 'light',
   avatar: {type: '', uri: ''},
   email: '',
   password: '',

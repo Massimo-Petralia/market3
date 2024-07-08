@@ -1,6 +1,7 @@
 export interface User {
  // accessTokken: string;
   id?: number;
+  favoriteTheme: 'light' | 'dark'
   name: string;
   avatar: {type: string; uri: string};
   email: string;
