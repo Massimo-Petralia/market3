@@ -10,7 +10,7 @@ export const DefaultAddress: Address = {
 
 export const DefaultUser: User = {
   id: undefined,
-  accessTokken: '',
+  //accessTokken: '',
   name: '',
   avatar: {type: '', uri: ''},
   email: '',

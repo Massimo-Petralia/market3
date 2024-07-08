@@ -1,5 +1,5 @@
 export interface User {
-  accessTokken: string;
+ // accessTokken: string;
   id?: number;
   name: string;
   avatar: {type: string; uri: string};
