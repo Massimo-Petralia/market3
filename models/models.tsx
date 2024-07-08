@@ -1,0 +1,29 @@
+export interface User {
+  accessTokken: string;
+  id?: number;
+  name: string;
+  avatar: {type: string; uri: string};
+  email: string;
+  password: string;
+  cart: Product[];
+  address: Address;
+}
+
+export interface Address {
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zipcode: string;
+}
+
+export type Product = {
+  id?: number;
+  name: string;
+  description: string;
+  price: string;
+  currency: '€' | '$';
+  images: string[];
+  userId?: number | null;
+};
+export type Currency = '€' | '$';
