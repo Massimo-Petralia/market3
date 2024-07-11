@@ -8,6 +8,8 @@ export type RootStackParamList = {
 export type TabStackParamList = {
   [Routes.root.tab.home.index]: NavigatorScreenParams<HomeStackParamList>;
   [Routes.root.tab.user.index]: NavigatorScreenParams<UserStackParamList>;
+  [Routes.root.tab.sell]: undefined//??
+  [Routes.root.tab.cart]: undefined
 };
 
 export type HomeStackParamList = {

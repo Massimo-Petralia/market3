@@ -1,12 +1,16 @@
-import store from '../store/store';
 import {View} from 'react-native';
 import {ToggleButton, useTheme} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
 import {setIsDarkTheme} from '../store/slices/theme-slice';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import tinycolor2 from 'tinycolor2';
 
 export const ToggleTheme = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const bottomNavColor: string = tinycolor2(
+    theme.colors.onBackground,
+  ).toHexString();
   return (
     <View
       style={{
@@ -18,7 +22,7 @@ export const ToggleTheme = () => {
         icon="theme-light-dark"
         onPress={() => {
           dispatch(setIsDarkTheme());
-          // setBottomNavColor(color);
+          changeNavigationBarColor(bottomNavColor, undefined, false);
         }}
         size={20}
       />
