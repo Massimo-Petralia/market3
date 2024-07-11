@@ -1,8 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {RootState} from './store';
-import {AuthState} from './models';
-import {User} from '../../models/models';
-const baseURL = 'http://192.168.1.101:3000';
+import {RootState} from '../store';
+import {AuthState} from '../models';
+import {User} from '../../../models/models';
+const baseURL = 'http://192.168.1.101:3000';//check ip
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,

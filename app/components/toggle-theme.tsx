@@ -2,7 +2,7 @@ import store from '../store/store';
 import {View} from 'react-native';
 import {ToggleButton, useTheme} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
-import {setIsDarkTheme} from '../store/theme-slice';
+import {setIsDarkTheme} from '../store/slices/theme-slice';
 
 export const ToggleTheme = () => {
   const dispatch = useDispatch();
