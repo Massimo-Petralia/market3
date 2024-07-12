@@ -20,8 +20,8 @@ export const notificationSlice = createSlice({
       const {notification} = action.payload;
       return {...state, notification};
     },
-    toggleModal: (state, action: PayloadAction<{isVisible: boolean}>) => {
-      const {isVisible} = action.payload;
+    toggleModal: (state) => {
+      const isVisible = state.isVisible;
       return {...state, isVisible: !isVisible};
     },
   },
