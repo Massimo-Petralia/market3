@@ -7,7 +7,7 @@ const notification: Notification = {
 };
 
 export const notificationSlice = createSlice({
-  name: 'notification',
+  name: 'alerts',
   initialState: {
     isVisible: false,
     notification,
@@ -28,4 +28,4 @@ export const notificationSlice = createSlice({
 });
 
 export const {setNotification, toggleModal} = notificationSlice.actions
-export const notificationReducer = notificationSlice.reducer
+export const alertsReducer = notificationSlice.reducer
