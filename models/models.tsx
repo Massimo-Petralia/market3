@@ -1,7 +1,7 @@
 export interface User {
- // accessTokken: string;
+  // accessTokken: string;
   id?: number;
-  favoriteTheme: 'light' | 'dark'
+  favoriteTheme: 'light' | 'dark';
   name: string;
   avatar: {type: string; uri: string};
   email: string;
@@ -28,3 +28,10 @@ export type Product = {
   userId?: number | null;
 };
 export type Currency = '€' | '$';
+
+export type NotificationType = 'info' | 'warning' | 'delete';
+
+export interface Notification {
+  type: NotificationType;
+  text: string;
+}

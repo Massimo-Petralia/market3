@@ -8,6 +8,7 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {RootNavigator} from './app/navigation/root-navigator';
 import {adaptNavigationTheme} from 'react-native-paper';
 import {selectIsDarkTheme} from './app/store/selectors/theme-selectors';
+import { ModalNotification } from './app/components/modal-notification';
 const {LightTheme} = adaptNavigationTheme({reactNavigationLight: DefaultTheme});
 const {DarkTheme} = adaptNavigationTheme({reactNavigationDark: DefaultTheme});
 
@@ -27,6 +28,7 @@ function AppContent(): React.JSX.Element {
         <RootNavigator />
       </NavigationContainer>
       <ToggleTheme />
+      <ModalNotification/>
     </PaperProviderWrapper>
   );
 }
