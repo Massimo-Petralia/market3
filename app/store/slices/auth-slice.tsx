@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {DefaultUser} from '../../models/default-values';
-import {AuthState} from './models';
+import {DefaultUser} from '../../../models/default-values';
+import {AuthState} from '../models';
 
 export const authSlice = createSlice({
   name: 'auth',
