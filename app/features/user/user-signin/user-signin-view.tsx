@@ -1,5 +1,23 @@
-import {Text} from 'react-native-paper';
+import {View} from 'react-native';
+import {Text, Button} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
+import Routes from '../../../navigation/routes';
 
 export const UserSignin = () => {
-  return <Text>user signin work !</Text>;
+  const navigation = useNavigation();
+  return (
+    <View>
+      <Text>If you are new</Text>
+      <Button
+        mode="text"
+        onPress={() =>
+          navigation.navigate(Routes.root.main, {
+            screen: Routes.root.tab.user.index,
+            params: {screen: Routes.root.tab.user.signup},
+          })
+        }>
+        Go to Signup
+      </Button>
+    </View>
+  );
 };

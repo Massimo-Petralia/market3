@@ -35,3 +35,8 @@ export interface Notification {
   type: NotificationType;
   text: string;
 }
+
+export interface UserAuth {
+  accessToken: string;
+  user: User
+}

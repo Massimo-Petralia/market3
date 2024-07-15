@@ -1,14 +1,14 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {RootState} from '../store';
-import {AuthState} from '../models';
+import {UserAuth} from '../../../models/models';
 import {User} from '../../../models/models';
-const baseURL = 'http://192.168.1.101:3000';//check ip
+const baseURL = 'http://192.168.1.101:3000'; //check ip
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
   prepareHeaders: (headers, {getState}) => {
     const state = getState() as RootState;
-    const token = state.auth.accessToken;
+    const token = state.userAuth.accessToken;
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -16,18 +16,18 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-export const api = createApi({
-  reducerPath: 'api',
+export const apiServices = createApi({
+  reducerPath: 'apiServices',
   baseQuery,
   endpoints: build => ({
-    signup: build.mutation<AuthState, User>({
+    signup: build.mutation<UserAuth, User>({
       query: user => ({
         url: '/users',
         method: 'POST',
         body: user,
       }),
     }),
-    signin: build.mutation<AuthState, {name: string; email: string}>({
+    signin: build.mutation<UserAuth, {name: string; email: string}>({
       query: ({name, email}) => ({
         url: '/signin',
         method: 'POST',
@@ -37,4 +37,4 @@ export const api = createApi({
   }),
 });
 
-export const {useSignupMutation, useSigninMutation} = api;
+export const {useSignupMutation, useSigninMutation} = apiServices;
