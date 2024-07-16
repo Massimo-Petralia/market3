@@ -11,9 +11,8 @@ export const UserSignin = () => {
       <Button
         mode="text"
         onPress={() =>
-          navigation.navigate(Routes.root.main, {
-            screen: Routes.root.tab.user.index,
-            params: {screen: Routes.root.tab.user.signup},
+          navigation.navigate(Routes.tab.user.index, {
+            screen: Routes.tab.user.signup,
           })
         }>
         Go to Signup

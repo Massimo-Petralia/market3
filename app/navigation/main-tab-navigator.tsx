@@ -19,16 +19,16 @@ export const MainTabNavigator = () => {
           const size = 26;
           let iconName = '';
           let color = '';
-          if (route.name === Routes.root.tab.home.index) {
+          if (route.name === Routes.tab.home.index) {
             iconName = focused ? 'home-circle' : 'home-circle-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
-          } else if (route.name === Routes.root.tab.user.index) {
+          } else if (route.name === Routes.tab.user.index) {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
-          } else if (route.name === Routes.root.tab.sell) {
+          } else if (route.name === Routes.tab.sell) {
             iconName = focused ? 'storefront' : 'storefront-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
-          } else if (route.name === Routes.root.tab.cart) {
+          } else if (route.name === Routes.tab.cart) {
             iconName = focused ? 'cart' : 'cart-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
           }
@@ -38,10 +38,10 @@ export const MainTabNavigator = () => {
           );
         },
       })}>
-      <Tab.Screen name={Routes.root.tab.home.index} component={HomeNavigator} />
-      <Tab.Screen name={Routes.root.tab.user.index} component={UserNavigator} />
-      <Tab.Screen name={Routes.root.tab.sell} component={ProductDetailPage} />
-      <Tab.Screen name={Routes.root.tab.cart} component={CartPage} />
+      <Tab.Screen name={Routes.tab.home.index} component={HomeNavigator} />
+      <Tab.Screen name={Routes.tab.user.index} component={UserNavigator} />
+      <Tab.Screen name={Routes.tab.sell} component={ProductDetailPage} />
+      <Tab.Screen name={Routes.tab.cart} component={CartPage} />
     </Tab.Navigator>
   );
 };

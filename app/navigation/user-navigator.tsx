@@ -10,11 +10,11 @@ export const UserNavigator = () => {
   return (
     <UserStack.Navigator>
       <UserStack.Screen
-        name={Routes.root.tab.user.signin}
+        name={Routes.tab.user.signin}
         component={UserSigninPage}
       />
       <UserStack.Screen
-        name={Routes.root.tab.user.signup}
+        name={Routes.tab.user.signup}
         component={UserSignupPage}
       />
     </UserStack.Navigator>

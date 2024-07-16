@@ -8,13 +8,13 @@ const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 export const HomeNavigator = () => {
   return (
-    <HomeStack.Navigator initialRouteName={Routes.root.tab.home.products}>
+    <HomeStack.Navigator initialRouteName={Routes.tab.home.products}>
       <HomeStack.Screen
-        name={Routes.root.tab.home.products}
+        name={Routes.tab.home.products}
         component={ProductsListPage}
       />
       <HomeStack.Screen
-        name={Routes.root.tab.home.productDetail}
+        name={Routes.tab.home.productDetail}
         component={ProductDetailPage}
       />
     </HomeStack.Navigator>

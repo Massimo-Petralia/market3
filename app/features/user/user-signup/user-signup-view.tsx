@@ -1,13 +1,14 @@
-import {Text, useTheme, TextInput, Button} from 'react-native-paper';
-import {ActivityIndicator, View, StyleSheet} from 'react-native';
+import {Text, useTheme, TextInput, Button, Avatar} from 'react-native-paper';
+import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
 import {User} from '../../../../models/models';
 import {DefaultUser} from '../../../../models/default-values';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/query';
 import {SerializedError} from '@reduxjs/toolkit';
 import Routes from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
 import {pick, types} from 'react-native-document-picker';
+import RNFS from 'react-native-fs';
 
 export const UserSignup = ({
   onSignup,
@@ -24,7 +25,8 @@ export const UserSignup = ({
   const theme = useTheme();
   const navigation = useNavigation();
   const [formValue, setFormValue] = useState<User>(DefaultUser);
-  const updateFormValue = (key: keyof User, value: string) => {
+  const defaultAvatar = require('../../../assets/images/user.png');
+  const updateFormValue = (key: keyof User, value: string | object) => {
     setFormValue(previousValue => ({...previousValue, [key]: value}));
   };
 
@@ -37,6 +39,22 @@ export const UserSignup = ({
   const handlePasswordChanges = (password: string) => {
     updateFormValue('password', password);
   };
+
+  const handleAvatarChanges = React.useCallback(async () => {
+    try {
+      const response = await pick({
+        type: [types.images],
+      });
+      const avatar = response[0];
+      const base64URI = await RNFS.readFile(avatar.uri, 'base64');
+      updateFormValue('avatar', {
+        type: avatar.type,
+        uri: `data:image/${avatar.type};base64, ${base64URI}`,
+      });
+    } catch (error) {
+      console.error('Error: ', error);
+    }
+  }, []);
 
   if (isLoading) {
     return (
@@ -51,7 +69,7 @@ export const UserSignup = ({
   }
   return (
     <View>
-      <View id="signup-form">
+      <View id="signup-form" style={{marginTop: 5}}>
         <TextInput
           style={style.textInput}
           label="Name"
@@ -67,9 +85,36 @@ export const UserSignup = ({
           label="Password"
           onChangeText={password => handlePasswordChanges(password)}
         />
+        <View style={{alignItems: 'center'}}>
+          <Pressable
+            style={{
+              marginVertical: 20,
+              borderWidth: 2,
+              borderRadius: 50,
+              borderColor: theme.colors.primary,
+            }}
+            onPress={() => handleAvatarChanges()}>
+            <Avatar.Image
+              style={{backgroundColor: 'transparent'}}
+              size={80}
+              source={
+                formValue.avatar.uri
+                  ? {uri: formValue.avatar.uri}
+                  : defaultAvatar
+              }
+            />
+          </Pressable>
+        </View>
         <Button
           style={{alignSelf: 'center'}}
-          onPress={() => onSignup(formValue)}
+          onPress={() =>
+            onSignup({
+              ...formValue,
+              name:
+                formValue.name.charAt(0).toUpperCase() +
+                formValue.name.slice(1),
+            })
+          }
           mode="contained">
           Signup
         </Button>
@@ -91,9 +136,8 @@ export const UserSignup = ({
         <Button
           mode="text"
           onPress={() =>
-            navigation.navigate(Routes.root.main, {
-              screen: Routes.root.tab.user.index,
-              params: {screen: Routes.root.tab.user.signin},
+            navigation.navigate(Routes.tab.user.index, {
+              screen: Routes.tab.user.signin,
             })
           }>
           Go to Signin
@@ -109,7 +153,7 @@ const style = StyleSheet.create({
   },
   textInput: {
     marginHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 5,
   },
   notificationArea: {
     marginVertical: 10,
@@ -117,6 +161,6 @@ const style = StyleSheet.create({
   },
   infoArea: {
     alignSelf: 'center',
-    marginVertical: 20,
+    marginVertical: 10,
   },
 });

@@ -1,21 +1,18 @@
 const Routes = {
-  root: {
-    main: 'Market3',
-    tab: {
-      home: {
-        index: 'Home',
-        products: 'Products',
-        productDetail: 'Product detail',
-      },
-      user: {
-        index: 'User',
-        signup: 'Signup',
-        signin: 'Signin',
-        address: 'Address',
-      },
-      sell: 'Sell',
-      cart: 'Cart',
+  tab: {
+    home: {
+      index: 'Home',
+      products: 'Products',
+      productDetail: 'Product detail',
     },
+    user: {
+      index: 'User',
+      signup: 'Signup',
+      signin: 'Signin',
+      address: 'Address',
+    },
+    sell: 'Sell',
+    cart: 'Cart',
   },
 } as const;
 
