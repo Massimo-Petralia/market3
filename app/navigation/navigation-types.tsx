@@ -1,26 +1,50 @@
-import Routes from './routes';
-import {NavigatorScreenParams} from '@react-navigation/native';
+import { NavigatorScreenParams, CompositeNavigationProp } from "@react-navigation/native";
+import Routes from './routes'
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialBottomTabNavigationProp } from "react-native-paper";
 
-export type TabStackParamList = {
-  [Routes.tab.home.index]: NavigatorScreenParams<HomeStackParamList>;
-  [Routes.tab.user.index]: NavigatorScreenParams<UserStackParamList>;
-  [Routes.tab.sell]: undefined; //??
-  [Routes.tab.cart]: undefined;
+export type AuthStackParamList = {
+    [Routes.Auth.Signin]: undefined;
+    [Routes.Auth.Signup]: undefined
+}
+
+export type MainTabsParamList = {
+    [Routes.MainTabs.HomeStack.index]: NavigatorScreenParams<HomeStackParamList>;
+
+    [Routes.MainTabs.User]: undefined;
+    [Routes.MainTabs.Sell]: undefined;
+    [Routes.MainTabs.Cart]: undefined;
 };
-
 export type HomeStackParamList = {
-  [Routes.tab.home.products]: undefined;
-  [Routes.tab.home.productDetail]: {id: number | null};
-};
 
-export type UserStackParamList = {
-  [Routes.tab.user.signup]: undefined;
-  [Routes.tab.user.signin]: undefined;
-  [Routes.tab.user.address]: undefined;
-};
+    [Routes.MainTabs.HomeStack.Home]: undefined;
+    [Routes.MainTabs.HomeStack.ProductDetail]: { productId: string }
+}
+
+export type RootStackParamList = {
+    Auth: NavigatorScreenParams<AuthStackParamList>;
+    MainTabs: NavigatorScreenParams<MainTabsParamList>;
+}
 
 declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends TabStackParamList {}
-  }
+    namespace ReactNavigation {
+        interface RootParamList extends RootStackParamList { }
+    }
 }
+
+export type AuthStackNavigationProp = CompositeNavigationProp<
+    NativeStackNavigationProp<AuthStackParamList, 'Signin'>,
+    NativeStackNavigationProp<RootStackParamList>
+>
+
+export type MainTabsNavigationProp = CompositeNavigationProp<
+    NativeStackNavigationProp<MainTabsParamList, 'HomeStack'>,
+    MaterialBottomTabNavigationProp<MainTabsParamList>
+>
+
+export type HomeStackNavigationProp = CompositeNavigationProp<
+    NativeStackNavigationProp<HomeStackParamList, 'Home'>,
+    NativeStackNavigationProp<HomeStackParamList>
+>
+
+export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;

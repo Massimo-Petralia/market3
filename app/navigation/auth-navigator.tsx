@@ -1,22 +1,22 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {UserStackParamList} from './navigation-types';
 import Routes from './routes';
 import {UserSigninPage} from '../features/user/user-signin/user-signin-page';
 import {UserSignupPage} from '../features/user/user-signup/user-signup-page';
+import { AuthStackParamList } from './navigation-types';
 
-const UserStack = createNativeStackNavigator<UserStackParamList>();
+const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
-export const UserNavigator = () => {
+export const AuthNavigator = () => {
   return (
-    <UserStack.Navigator>
-      <UserStack.Screen
-        name={Routes.tab.user.signin}
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name={Routes.Auth.Signin}
         component={UserSigninPage}
       />
-      <UserStack.Screen
-        name={Routes.tab.user.signup}
+      <AuthStack.Screen
+        name={Routes.Auth.Signup}
         component={UserSignupPage}
       />
-    </UserStack.Navigator>
+    </AuthStack.Navigator>
   );
 };

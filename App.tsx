@@ -9,6 +9,7 @@ import {selectIsDarkTheme} from './app/store/selectors/theme-selectors';
 import {ModalNotification} from './app/components/modal-notification';
 import {MainTabNavigator} from './app/navigation/main-tab-navigator';
 import {MainAppBar} from './app/components/main-app-bar';
+import { RootNavigator } from './app/navigation/root-navigator';
 const {LightTheme} = adaptNavigationTheme({reactNavigationLight: DefaultTheme});
 const {DarkTheme} = adaptNavigationTheme({reactNavigationDark: DefaultTheme});
 
@@ -26,7 +27,7 @@ function AppContent(): React.JSX.Element {
       />
       <MainAppBar />
       <NavigationContainer theme={!isDarkTheme ? LightTheme : DarkTheme}>
-        <MainTabNavigator />
+        <RootNavigator/>
       </NavigationContainer>
       <ModalNotification />
     </PaperProviderWrapper>
