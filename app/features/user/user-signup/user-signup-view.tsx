@@ -9,6 +9,7 @@ import Routes from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
 import {pick, types} from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
+import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 
 export const UserSignup = ({
   onSignup,
@@ -23,22 +24,19 @@ export const UserSignup = ({
   error: FetchBaseQueryError | SerializedError | undefined;
 }) => {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthStackNavigationProp>();
   const [formValue, setFormValue] = useState<User>(DefaultUser);
   const defaultAvatar = require('../../../assets/images/user.png');
   const updateFormValue = (key: keyof User, value: string | object) => {
     setFormValue(previousValue => ({...previousValue, [key]: value}));
   };
 
-  const handleNameChanges = (name: string) => {
-    updateFormValue('name', name);
-  };
-  const handleEmailChanges = (email: string) => {
-    updateFormValue('email', email);
-  };
-  const handlePasswordChanges = (password: string) => {
+  const handleNameChanges = (name: string) => updateFormValue('name', name);
+
+  const handleEmailChanges = (email: string) => updateFormValue('email', email);
+
+  const handlePasswordChanges = (password: string) =>
     updateFormValue('password', password);
-  };
 
   const handleAvatarChanges = React.useCallback(async () => {
     try {
@@ -59,7 +57,7 @@ export const UserSignup = ({
   if (isLoading) {
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <ActivityIndicator size="large"/>
       </View>
     );
   }
@@ -135,11 +133,7 @@ export const UserSignup = ({
         <Text>If you are already registered</Text>
         <Button
           mode="text"
-          onPress={() =>
-            navigation.navigate(Routes.tab.user.index, {
-              screen: Routes.tab.user.signin,
-            })
-          }>
+          onPress={() => navigation.navigate(Routes.Auth.Signin)}>
           Go to Signin
         </Button>
       </View>

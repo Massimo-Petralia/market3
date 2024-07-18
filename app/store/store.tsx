@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {userAuthReducer} from './slices/user-auth-slice';
+import {AuthReducer} from './slices/auth-slice';
 import {themeReducer} from './slices/theme-slice';
 import {apiServices} from './slices/api-services-slice';
 import {alertsReducer} from './slices/alerts-slice';
@@ -7,7 +7,7 @@ import {alertsReducer} from './slices/alerts-slice';
 const store = configureStore({
   reducer: {
     [apiServices.reducerPath]: apiServices.reducer,
-    userAuth: userAuthReducer,
+    auth: AuthReducer,
     theme: themeReducer,
     alerts: alertsReducer,
   },
