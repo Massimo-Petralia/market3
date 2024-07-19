@@ -5,17 +5,21 @@ import {UserSignin} from './user-signin-view';
 import {useNavigation} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
 import {useEffect} from 'react';
-import { setCredential } from '../../../store/slices/auth-slice';
+import {setCredential} from '../../../store/slices/auth-slice';
+import {setSignInRequestId} from '../../../store/slices/requestId-list-slice';
+import {useDispatch} from 'react-redux';
 
 export const UserSigninPage = () => {
   const navigation = useNavigation();
-  const [signin, {data, isLoading, isSuccess, error}] =
+  const dispatch = useDispatch();
+  const [signin, {data, isLoading, isSuccess, requestId, error}] =
     useSigninMutation();
   const onSignin = ({email, password}: {email: string; password: string}) => {
     signin({email, password});
   };
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && requestId) {
+      dispatch(setSignInRequestId(requestId));
       navigation.navigate('MainTabs', {
         screen: Routes.MainTabs.HomeStack.index,
         params: {screen: Routes.MainTabs.HomeStack.Home},
