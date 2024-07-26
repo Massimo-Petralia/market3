@@ -40,3 +40,5 @@ export interface UserAuth {
   accessToken: string;
   user: User
 }
+
+export type LoadingState = 'idle' | 'loading'
