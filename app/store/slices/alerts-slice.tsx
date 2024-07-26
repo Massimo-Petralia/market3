@@ -28,4 +28,4 @@ export const notificationSlice = createSlice({
 });
 
 export const {setNotification, toggleModal} = notificationSlice.actions
-export const alertsReducer = notificationSlice.reducer
+export const  modalAlertsReducer = notificationSlice.reducer

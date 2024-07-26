@@ -3,26 +3,13 @@ import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
 import {User} from '../../../../models/models';
 import {DefaultUser} from '../../../../models/default-values';
 import React, {useState} from 'react';
-import {FetchBaseQueryError} from '@reduxjs/toolkit/query';
-import {SerializedError} from '@reduxjs/toolkit';
 import Routes from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
 import {pick, types} from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
 import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 
-export const UserSignup = ({
-  onSignup,
-  isLoading,
-  isSuccess,
-  error,
-}: {
-  onSignup: (user: User) => void;
-
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
-}) => {
+export const UserSignup = () => {
   const theme = useTheme();
   const navigation = useNavigation<AuthStackNavigationProp>();
   const [formValue, setFormValue] = useState<User>(DefaultUser);
@@ -54,17 +41,6 @@ export const UserSignup = ({
     }
   }, []);
 
-  if (isLoading) {
-    return (
-      <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large"/>
-      </View>
-    );
-  }
-
-  if (error) {
-    console.error('Error: ', error);
-  }
   return (
     <View>
       <View id="signup-form" style={{marginTop: 5}}>
@@ -105,29 +81,22 @@ export const UserSignup = ({
         </View>
         <Button
           style={{alignSelf: 'center'}}
-          onPress={() =>
-            onSignup({
-              ...formValue,
-              name:
-                formValue.name.charAt(0).toUpperCase() +
-                formValue.name.slice(1),
-            })
-          }
+          onPress={() => {}}
           mode="contained">
           Signup
         </Button>
       </View>
 
-      {isSuccess ? (
-        <View style={style.notificationArea}>
-          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-            Registration was successful !
-          </Text>
-          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-            you can sign in with your credentials
-          </Text>
-        </View>
-      ) : null}
+      {/* on success */}
+      <View style={style.notificationArea}>
+        <Text variant="bodyMedium" style={{color: style.infoText.color}}>
+          Registration was successful !
+        </Text>
+        <Text variant="bodyMedium" style={{color: style.infoText.color}}>
+          you can sign in with your credentials
+        </Text>
+      </View>
+      {/*  */}
 
       <View style={style.infoArea}>
         <Text>If you are already registered</Text>
