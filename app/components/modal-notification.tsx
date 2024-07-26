@@ -8,7 +8,7 @@ import {
 } from '../store/selectors/alerts-selectors';
 import {NotificationType} from '../../models/models';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleModal } from '../store/slices/alerts-slice';
+import { toggleNotification } from '../store/slices/alerts-slice';
 
 interface CustomModal {
   iconName: string;
@@ -47,7 +47,7 @@ export const ModalNotification = () => {
   };
   return (
     <Portal>
-        <Modal visible={isVisible} onDismiss={()=>dispatch(toggleModal())}>
+        <Modal visible={isVisible} onDismiss={()=>dispatch(toggleNotification())}>
             <Text>Hello world !</Text>
         </Modal>
     </Portal>

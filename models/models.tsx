@@ -1,5 +1,4 @@
 export interface User {
-  // accessTokken: string;
   id?: number;
   favoriteTheme: 'light' | 'dark';
   name: string;
@@ -38,7 +37,7 @@ export interface Notification {
 
 export interface UserAuth {
   accessToken: string;
-  user: User
+  user: User;
 }
 
-export type LoadingState = 'idle' | 'loading'
+export type LoadingState = 'idle' | 'loading';

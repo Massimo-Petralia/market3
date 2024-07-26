@@ -15,17 +15,17 @@ export const notificationSlice = createSlice({
   reducers: {
     setNotification: (
       state,
-      action: PayloadAction<{notification: Notification}>,
+      action: PayloadAction<Notification>,
     ) => {
-      const {notification} = action.payload;
-      return {...state, notification};
+      const {type, text} = action.payload;
+      return {...state, notification: {type, text}};
     },
-    toggleModal: (state) => {
+    toggleNotification: (state) => {
       const isVisible = state.isVisible;
       return {...state, isVisible: !isVisible};
     },
   },
 });
 
-export const {setNotification, toggleModal} = notificationSlice.actions
-export const  modalAlertsReducer = notificationSlice.reducer
+export const {setNotification, toggleNotification} = notificationSlice.actions
+export const  alertsReducer = notificationSlice.reducer

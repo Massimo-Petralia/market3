@@ -9,10 +9,8 @@ import {User} from '../../../../models/models';
 
 export const UserSignin = ({
   onSignin,
-  isLoading,
 }: {
   onSignin: ({email, password}: {email: string; password: string}) => void;
-  isLoading: boolean;
 }) => {
   const navigation = useNavigation<AuthStackNavigationProp>();
   const [formValue, setFormValue] = useState<User>(DefaultUser);
@@ -22,13 +20,13 @@ export const UserSignin = ({
   const handleEmailChanges = (email: string) => updateFormValue('email', email);
   const handlePasswordChanges = (password: string) =>
     updateFormValue('password', password);
-  if (isLoading) {
-    return (
-      <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large"/>
-      </View>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <View style={{justifyContent: 'center', flex: 1}}>
+  //       <ActivityIndicator size="large"/>
+  //     </View>
+  //   );
+  // }
 
   return (
     <View>

@@ -29,7 +29,7 @@ function AppContent(): React.JSX.Element {
       <NavigationContainer theme={!isDarkTheme ? LightTheme : DarkTheme}>
         <RootNavigator/>
       </NavigationContainer>
-      <ModalNotification />
+      {/* <ModalNotification /> */}
     </PaperProviderWrapper>
   );
 }

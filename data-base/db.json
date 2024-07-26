@@ -18,6 +18,158 @@
         "zipcode": ""
       },
       "id": 1
+    },
+    {
+      "email": "saru@hotmail.it",
+      "password": "$2a$10$iuqjLyi4I3eLmHiUJpVvbenE9P8vWg57BpU6spTm8hOHrg.KjdQqi",
+      "name": "saruman",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 2
+    },
+    {
+      "email": "grupi@hotmail.it",
+      "password": "$2a$10$vpDc66T4jNE5hfRaSNLBDe6oqjk4W83q3336P107weer4MP.huD4S",
+      "name": "grupillo",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 3
+    },
+    {
+      "email": "primi@hotmail.it",
+      "password": "$2a$10$fgDTf5/XLB/3.P8qRUZ5befjdQQcFIhoQAck5nznxnqyKdnrI4PJm",
+      "name": "primigi",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 4
+    },
+    {
+      "email": "frog@hotmail.it",
+      "password": "$2a$10$2pJ1UNO4hpCHgVvPv8Nb1uVNABXmXBPBMf53GcBCoGbNtekHIvdYW",
+      "name": "frog",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 5
+    },
+    {
+      "email": "molle@hotmail.it",
+      "password": "$2a$10$kWdI2vC6ipmzu7I2mQ49UePId0r4y4mbS8wUptfshLK64Whh8ZqOe",
+      "name": "molleskine",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 6
+    },
+    {
+      "email": "fgfgfffg@hotmail.it",
+      "password": "$2a$10$4T/Y.sm09QCXLf6SMedzWe1KOBqqVCDqeB/Zd0vgoIdkaetTrORZO",
+      "name": "ggfff",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 7
+    },
+    {
+      "email": "prezz@hotmail.it",
+      "password": "$2a$10$M6REjGWTWNwZKicDIjDyDOvGBCyedSY3sSPWPJ8rPXL5BVyqSNTLK",
+      "name": "prezzemolo",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 8
+    },
+    {
+      "email": "priamo@hotmail.it",
+      "password": "$2a$10$nMsU7pE2UF7wZbbat8WdnO7vl6M98NOsyJxBAPGCKsasAWm9Gtyqq",
+      "name": "priamo",
+      "favoriteTheme": "light",
+      "avatar": {
+        "type": "",
+        "uri": ""
+      },
+      "cart": [],
+      "address": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zipcode": ""
+      },
+      "id": 9
     }
   ],
   "products": []

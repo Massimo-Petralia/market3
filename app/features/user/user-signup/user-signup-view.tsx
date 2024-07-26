@@ -1,6 +1,6 @@
 import {Text, useTheme, TextInput, Button, Avatar} from 'react-native-paper';
 import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
-import {User} from '../../../../models/models';
+import {Notification, User} from '../../../../models/models';
 import {DefaultUser} from '../../../../models/default-values';
 import React, {useState} from 'react';
 import Routes from '../../../navigation/routes';
@@ -9,9 +9,18 @@ import {pick, types} from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
 import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 
-export const UserSignup = () => {
+export const UserSignup = ({
+  onSignup,
+  isVisible,
+  notification,
+}: {
+  onSignup: (user: User) => void;
+  isVisible: boolean;
+  notification: Notification;
+}) => {
   const theme = useTheme();
   const navigation = useNavigation<AuthStackNavigationProp>();
+
   const [formValue, setFormValue] = useState<User>(DefaultUser);
   const defaultAvatar = require('../../../assets/images/user.png');
   const updateFormValue = (key: keyof User, value: string | object) => {
@@ -81,22 +90,22 @@ export const UserSignup = () => {
         </View>
         <Button
           style={{alignSelf: 'center'}}
-          onPress={() => {}}
+          onPress={() => onSignup(formValue)}
           mode="contained">
           Signup
         </Button>
       </View>
 
-      {/* on success */}
-      <View style={style.notificationArea}>
-        <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-          Registration was successful !
-        </Text>
-        <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-          you can sign in with your credentials
-        </Text>
-      </View>
-      {/*  */}
+      {isVisible ? (
+        <View style={style.notificationArea}>
+          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
+            {notification.text}
+          </Text>
+          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
+            you can sign in with your credentials
+          </Text>
+        </View>
+      ) : null}
 
       <View style={style.infoArea}>
         <Text>If you are already registered</Text>
