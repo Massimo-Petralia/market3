@@ -33,6 +33,7 @@ export type NotificationType = 'info' | 'warning' | 'delete';
 export interface Notification {
   type: NotificationType;
   text: string;
+  compType: 'modal' | 'snackbar'
 }
 
 export interface UserAuth {

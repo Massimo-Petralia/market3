@@ -52,8 +52,8 @@ export const UserSignup = ({
     }
   }, []);
 
-  if(loadingState === 'loading') {
-    <ActivityIndicator/>
+  if (loadingState === 'loading') {
+    <ActivityIndicator />;
   }
 
   return (
@@ -102,16 +102,13 @@ export const UserSignup = ({
         </Button>
       </View>
 
-      {isVisible ? (
+      {/* {isVisible && notification.type === 'info' ? (
         <View style={style.notificationArea}>
           <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-            {notification.text}
-          </Text>
-          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-            you can sign in with your credentials
+            You can sign in with your credentials
           </Text>
         </View>
-      ) : null}
+      ) : null} */}
 
       <View style={style.infoArea}>
         <Text>If you are already registered</Text>

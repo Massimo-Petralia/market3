@@ -1,14 +1,15 @@
-import {Portal, Modal, Text, Button} from 'react-native-paper';
+import {Portal, Modal, Text, Button, Snackbar} from 'react-native-paper';
 import {View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useTheme} from 'react-native-paper';
 import {
   selectNotification,
   selectIsVisible,
+  selectCompType,
 } from '../store/selectors/alerts-selectors';
 import {NotificationType} from '../../models/models';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleNotification } from '../store/slices/alerts-slice';
+import {useSelector, useDispatch} from 'react-redux';
+import {toggleNotification} from '../store/slices/alerts-slice';
 
 interface CustomModal {
   iconName: string;
@@ -17,9 +18,10 @@ interface CustomModal {
 
 export const Notification = () => {
   const theme = useTheme();
-  const isVisible = useSelector(selectIsVisible)
-  const dispatch = useDispatch()
-  const customizeModal = (type: NotificationType): CustomModal => {
+  const isVisible = useSelector(selectIsVisible);
+  const notification = useSelector(selectNotification);
+  const dispatch = useDispatch();
+  const customizeNotification = (type: NotificationType): CustomModal => {
     let stylizedContent: CustomModal = {
       iconName: '',
       color: '',
@@ -45,11 +47,34 @@ export const Notification = () => {
     }
     return stylizedContent;
   };
-  return (
-    <Portal>
-        <Modal visible={isVisible} onDismiss={()=>dispatch(toggleNotification())}>
-            <Text>Hello world !</Text>
+  if (notification.compType === 'snackbar') {
+    return (
+      <Snackbar
+        visible={isVisible}
+        onDismiss={() => dispatch(toggleNotification())}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <FontAwesome
+            name={customizeNotification(notification.type).iconName}
+            color={customizeNotification(notification.type).color}
+          />
+          <Text style={{color: customizeNotification(notification.type).color}}>
+            {' '}
+            {notification.text}
+          </Text>
+        </View>
+      </Snackbar>
+    );
+  }
+
+  if (notification.compType === 'modal') {
+    return (
+      <Portal>
+        <Modal
+          visible={isVisible}
+          onDismiss={() => dispatch(toggleNotification())}>
+          <Text>Hello world !</Text>
         </Modal>
-    </Portal>
-  )
+      </Portal>
+    );
+  }
 };
