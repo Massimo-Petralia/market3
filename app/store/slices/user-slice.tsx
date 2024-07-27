@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {DefaultUser} from '../../../models/default-values';
 import {
   LoadingState,
-Notification,
+  Notification,
   User,
   UserAuth,
 } from '../../../models/models';
@@ -24,12 +24,11 @@ const userSlice = createSlice({
         return {...state, loadingState: 'loading'};
       }
     },
-    stopLoading : (state) => {
-      if(state.loadingState === 'loading'){
-        return {...state, loadingState: 'idle'}
+    stopLoading: state => {
+      if (state.loadingState === 'loading') {
+        return {...state, loadingState: 'idle'};
       }
-    }
-    ,
+    },
     createUserSuccess: (state, action: PayloadAction<UserAuth>) => {
       if (state.loadingState === 'loading') {
         return {
@@ -40,13 +39,13 @@ const userSlice = createSlice({
         };
       }
     },
-    creteUserFailed: (state, action: PayloadAction<any>) => {
+    creteUserFailed: (state, action: PayloadAction<string>) => {
       console.log('create user failed: ', action.payload);
     },
   },
 });
 
-export const {createUser,stopLoading, createUserSuccess, creteUserFailed} =
+export const {createUser, stopLoading, createUserSuccess, creteUserFailed} =
   userSlice.actions;
 export const userReducer = userSlice.reducer;
 
@@ -64,12 +63,17 @@ export const createUserThunk = (user: User) => async (dispatch: Dispatch) => {
         const notification: Notification = {type: 'warning', text: data};
         dispatch(setNotification(notification));
       } else {
-        dispatch(stopLoading())
-        const notification: Notification = {type: 'info', text: 'Registration was successful !'}
-        dispatch(setNotification(notification))
-        dispatch(toggleNotification())
+        dispatch(stopLoading());
+        const notification: Notification = {
+          type: 'info',
+          text: 'Registration was successful !',
+        };
+        dispatch(setNotification(notification));
+        dispatch(toggleNotification());
       }
       console.log('response: ', data);
     })
-    .catch(error => dispatch(creteUserFailed(error)));
+    .catch((error: Error) => {
+      dispatch(creteUserFailed(error.message));
+    });
 };

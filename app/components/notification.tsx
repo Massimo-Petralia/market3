@@ -15,7 +15,7 @@ interface CustomModal {
   color: string;
 }
 
-export const ModalNotification = () => {
+export const Notification = () => {
   const theme = useTheme();
   const isVisible = useSelector(selectIsVisible)
   const dispatch = useDispatch()

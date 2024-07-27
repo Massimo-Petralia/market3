@@ -7,9 +7,11 @@ import {
   selectIsVisible,
   selectNotification,
 } from '../../../store/selectors/alerts-selectors';
+import { selectLoadingState } from '../../../store/selectors/user-selectors';
 
 export const UserSignupPage = () => {
   const dispatch: AppDispatch = useDispatch();
+  const loadingState = useSelector(selectLoadingState)
   const isVisible = useSelector(selectIsVisible);
   const notification = useSelector(selectNotification);
 
@@ -20,6 +22,7 @@ export const UserSignupPage = () => {
     <>
       <UserSignup
         onSignup={onSignup}
+        loadingState={loadingState}
         isVisible={isVisible}
         notification={notification}
       />

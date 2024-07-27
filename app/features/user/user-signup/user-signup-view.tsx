@@ -1,6 +1,6 @@
 import {Text, useTheme, TextInput, Button, Avatar} from 'react-native-paper';
 import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
-import {Notification, User} from '../../../../models/models';
+import {LoadingState, Notification, User} from '../../../../models/models';
 import {DefaultUser} from '../../../../models/default-values';
 import React, {useState} from 'react';
 import Routes from '../../../navigation/routes';
@@ -11,10 +11,12 @@ import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 
 export const UserSignup = ({
   onSignup,
+  loadingState,
   isVisible,
   notification,
 }: {
   onSignup: (user: User) => void;
+  loadingState: LoadingState;
   isVisible: boolean;
   notification: Notification;
 }) => {
@@ -49,6 +51,10 @@ export const UserSignup = ({
       console.error('Error: ', error);
     }
   }, []);
+
+  if(loadingState === 'loading') {
+    <ActivityIndicator/>
+  }
 
   return (
     <View>
