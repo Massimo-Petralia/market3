@@ -1,22 +1,21 @@
-const Routes = {
-  root: {
-    main: 'Market3',
-    tab: {
-      home: {
-        index: 'Home',
-        products: 'Products',
-        productDetail: 'Product detail',
-      },
-      user: {
-        index: 'User',
-        signup: 'Signup',
-        signin: 'Signin',
-        address: 'Address',
-      },
-      sell: 'Sell',
-      cart: 'Cart',
-    },
+export const Routes = {
+  Auth: {
+    Signin: 'Signin',
+    Signup: 'Signup'
   },
-} as const;
+  MainTabs: {
+    index: 'MainTabs',
+    HomeStack: {
+      index: 'HomeStack',
+      Home: 'Home',
+      ProductDetail: 'ProductDetail'
+    },
+    User: 'User',
+    Sell: 'Sell',
+    Cart: 'Cart'
+  },
+
+} as const
+
 
 export default Routes;

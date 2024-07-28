@@ -1,5 +1,4 @@
 export interface User {
-  // accessTokken: string;
   id?: number;
   favoriteTheme: 'light' | 'dark';
   name: string;
@@ -34,4 +33,12 @@ export type NotificationType = 'info' | 'warning' | 'delete';
 export interface Notification {
   type: NotificationType;
   text: string;
+  compType: 'modal' | 'snackbar'
 }
+
+export interface UserAuth {
+  accessToken: string;
+  user: User;
+}
+
+export type LoadingState = 'idle' | 'loading';

@@ -1,20 +1,18 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {authReducer} from './slices/auth-slice';
 import {themeReducer} from './slices/theme-slice';
-import {api} from './slices/api-slice';
-import {alertsReducer} from './slices/alerts-slice';
+import { alertsReducer} from './slices/alerts-slice';
+import { userReducer } from './slices/user-slice';
 
 const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
-    auth: authReducer,
     theme: themeReducer,
     alerts: alertsReducer,
+    user: userReducer
+  
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
 
 export default store;

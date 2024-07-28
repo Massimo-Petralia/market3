@@ -4,6 +4,7 @@ import {Notification} from '../../../models/models';
 const notification: Notification = {
   type: 'info',
   text: '',
+  compType: 'snackbar'
 };
 
 export const notificationSlice = createSlice({
@@ -15,17 +16,17 @@ export const notificationSlice = createSlice({
   reducers: {
     setNotification: (
       state,
-      action: PayloadAction<{notification: Notification}>,
+      action: PayloadAction<Notification>,
     ) => {
-      const {notification} = action.payload;
-      return {...state, notification};
+      const {type, text, compType} = action.payload;
+      return {...state, notification: {type, text, compType}};
     },
-    toggleModal: (state) => {
+    toggleNotification: (state) => {
       const isVisible = state.isVisible;
       return {...state, isVisible: !isVisible};
     },
   },
 });
 
-export const {setNotification, toggleModal} = notificationSlice.actions
-export const alertsReducer = notificationSlice.reducer
+export const {setNotification, toggleNotification} = notificationSlice.actions
+export const  alertsReducer = notificationSlice.reducer
