@@ -64,6 +64,9 @@ const userSlice = createSlice({
         return {...state, loadingState: 'idle'};
       }
     },
+    logoutUser: state => {
+      return {...state, accessToken: '', user: DefaultUser};
+    },
   },
 });
 
@@ -75,6 +78,7 @@ export const {
   signinUser,
   signinUserSuccess,
   signinUserFailed,
+  logoutUser
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
