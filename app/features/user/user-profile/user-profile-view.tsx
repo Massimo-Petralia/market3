@@ -6,6 +6,7 @@ import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 
 export const UserProfile = () => {
   const navigation = useNavigation<AuthStackNavigationProp>();
+  //userDetail state var
   return (
     <View>
       <Text>User profile work !</Text>

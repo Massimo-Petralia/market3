@@ -1,16 +1,18 @@
 import {View, StyleSheet} from 'react-native';
 import {Text, Button, TextInput, ActivityIndicator} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
 import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {DefaultUser} from '../../../../models/default-values';
-import {User} from '../../../../models/models';
+import {LoadingState, User} from '../../../../models/models';
 
 export const UserSignin = ({
   onSignin,
+  loadingState,
 }: {
   onSignin: ({email, password}: {email: string; password: string}) => void;
+  loadingState: LoadingState;
 }) => {
   const navigation = useNavigation<AuthStackNavigationProp>();
   const [formValue, setFormValue] = useState<User>(DefaultUser);
@@ -20,13 +22,20 @@ export const UserSignin = ({
   const handleEmailChanges = (email: string) => updateFormValue('email', email);
   const handlePasswordChanges = (password: string) =>
     updateFormValue('password', password);
-  // if (isLoading) {
-  //   return (
-  //     <View style={{justifyContent: 'center', flex: 1}}>
-  //       <ActivityIndicator size="large"/>
-  //     </View>
-  //   );
-  // }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setFormValue(DefaultUser);
+    }, []),
+  );
+
+  if (loadingState === 'loading') {
+    return (
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <View>

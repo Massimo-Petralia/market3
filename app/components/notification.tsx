@@ -50,6 +50,7 @@ export const Notification = () => {
   if (notification.compType === 'snackbar') {
     return (
       <Snackbar
+      wrapperStyle={{marginBottom:80}}
         visible={isVisible}
         onDismiss={() => dispatch(toggleNotification())}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>

@@ -53,7 +53,11 @@ export const UserSignup = ({
   }, []);
 
   if (loadingState === 'loading') {
-    <ActivityIndicator />;
+    return (
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (

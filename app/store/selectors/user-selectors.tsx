@@ -17,3 +17,8 @@ export const selectIsCreated = createSelector(
     [selectUser],
     (user) => user.isCreated
 )
+
+export const selectAccessToken = createSelector(
+    [selectUser],
+    ({accessToken})=> accessToken
+)

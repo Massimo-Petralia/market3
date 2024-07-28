@@ -20,9 +20,9 @@
       "id": 1
     },
     {
-      "email": "saru@hotmail.it",
-      "password": "$2a$10$iuqjLyi4I3eLmHiUJpVvbenE9P8vWg57BpU6spTm8hOHrg.KjdQqi",
-      "name": "saruman",
+      "email": "wonder@hotmail.it",
+      "password": "$2a$10$PpdCQ.lkKK4t13r9l9A0buN86XBTTQEo6ywSSAj7pTmf1hpgmiyuu",
+      "name": "wondering",
       "favoriteTheme": "light",
       "avatar": {
         "type": "",
@@ -39,9 +39,9 @@
       "id": 2
     },
     {
-      "email": "grupi@hotmail.it",
-      "password": "$2a$10$vpDc66T4jNE5hfRaSNLBDe6oqjk4W83q3336P107weer4MP.huD4S",
-      "name": "grupillo",
+      "email": "dadsa@hotmail.it",
+      "password": "$2a$10$YCrlYKZF7c5wgLHxg6pLSebiHadj9IByXCD3znfjrjLqHk29MpySS",
+      "name": "dadsadsa",
       "favoriteTheme": "light",
       "avatar": {
         "type": "",
@@ -58,9 +58,9 @@
       "id": 3
     },
     {
-      "email": "primi@hotmail.it",
-      "password": "$2a$10$fgDTf5/XLB/3.P8qRUZ5befjdQQcFIhoQAck5nznxnqyKdnrI4PJm",
-      "name": "primigi",
+      "email": "ara@hotmail.it",
+      "password": "$2a$10$XGLeGpelp5hIzKuqvHaBFuGwF0KRBvHcPRUum5HWx7ZTMR5y7YVO6",
+      "name": "arauncaria",
       "favoriteTheme": "light",
       "avatar": {
         "type": "",
@@ -77,9 +77,9 @@
       "id": 4
     },
     {
-      "email": "frog@hotmail.it",
-      "password": "$2a$10$2pJ1UNO4hpCHgVvPv8Nb1uVNABXmXBPBMf53GcBCoGbNtekHIvdYW",
-      "name": "frog",
+      "email": "ranma@hotmail.it",
+      "password": "$2a$10$Uem.STIbW/MJDZqSijL2uOCKy7um5FAOJx314RP7elgcSlomtn9Ii",
+      "name": "ranmarruu",
       "favoriteTheme": "light",
       "avatar": {
         "type": "",
@@ -96,9 +96,9 @@
       "id": 5
     },
     {
-      "email": "molle@hotmail.it",
-      "password": "$2a$10$kWdI2vC6ipmzu7I2mQ49UePId0r4y4mbS8wUptfshLK64Whh8ZqOe",
-      "name": "molleskine",
+      "email": "pro@hotmail.it",
+      "password": "$2a$10$e9S5jw8ZulBHbISUZuDgI.RxISG46tZKhaCYksr8b37Bzv5JDS8GC",
+      "name": "procularum",
       "favoriteTheme": "light",
       "avatar": {
         "type": "",
@@ -113,348 +113,6 @@
         "zipcode": ""
       },
       "id": 6
-    },
-    {
-      "email": "fgfgfffg@hotmail.it",
-      "password": "$2a$10$4T/Y.sm09QCXLf6SMedzWe1KOBqqVCDqeB/Zd0vgoIdkaetTrORZO",
-      "name": "ggfff",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 7
-    },
-    {
-      "email": "prezz@hotmail.it",
-      "password": "$2a$10$M6REjGWTWNwZKicDIjDyDOvGBCyedSY3sSPWPJ8rPXL5BVyqSNTLK",
-      "name": "prezzemolo",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 8
-    },
-    {
-      "email": "priamo@hotmail.it",
-      "password": "$2a$10$nMsU7pE2UF7wZbbat8WdnO7vl6M98NOsyJxBAPGCKsasAWm9Gtyqq",
-      "name": "priamo",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 9
-    },
-    {
-      "email": "adadas@hotmail.it",
-      "password": "$2a$10$.Q.LPZH8NKyMXfOlPqLUhO.a8KK5H8ReHwbn0jTwemPpQ13KxVF5y",
-      "name": "sara",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 10
-    },
-    {
-      "email": "sargasso@hotmail.it",
-      "password": "$2a$10$OVDuj3wghHuCs4FZVEfdKuFhqKBboXrC9.h3fArHKo1xm4.gESk.m",
-      "name": "brizzolato",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 11
-    },
-    {
-      "email": "sargasso@hotmail",
-      "password": "$2a$10$7sY/dykl9HZxdvCuppHACuucgZv7NRPZxeCL5bq.tkK3P2UdfceGa",
-      "name": "brizzolato",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 12
-    },
-    {
-      "email": "nonno@hotmail.it",
-      "password": "$2a$10$zmr1kGFmBTdEpPVTs4V3Mu5aZQJ.SUIy1FhzioTSy5M69dwJxED86",
-      "name": "nonno",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 13
-    },
-    {
-      "email": "nasa@hotmail.it",
-      "password": "$2a$10$7ECXxrU8WGJAUWtVUDQF5.RiXbD4Xy15DomyrKwDvUhOE8JAwgZBG",
-      "name": "nonsdsa",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 14
-    },
-    {
-      "email": "otitit@hotmail.it",
-      "password": "$2a$10$3niXd6d9ED8wujsbhx2eR.xxxDJFNxzJNr8crypiTowKaeCIurc9q",
-      "name": "nog",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 15
-    },
-    {
-      "email": "pier@hotmail.it",
-      "password": "$2a$10$II36AIS9BmXaVNvC5oRu0.hgKz8T4Jg8RmGGm3MPQFVmwS/BjlcH.",
-      "name": "perino",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 16
-    },
-    {
-      "email": "piedddr@hotmail.it",
-      "password": "$2a$10$3rNmpgdhQrrJ4DMx6BBY3Ogtvc.oPnXKCzFuCK4WOrwoDWgryF2Je",
-      "name": "perindd",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 17
-    },
-    {
-      "email": "piedr@hotmail.it",
-      "password": "$2a$10$320QLACYawecFwNSizUbPOKP9W69wNgk/mTTVojXrDLbzg3ndba0O",
-      "name": "perin",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 18
-    },
-    {
-      "email": "pir@hotmail.it",
-      "password": "$2a$10$bU8jnKdx8hfRXwJ7bqixVOcLStmXVLf6lfEsFnOsAsXheyFQihp1W",
-      "name": "per",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 19
-    },
-    {
-      "email": "pikkkr@hotmail.it",
-      "password": "$2a$10$DcUuzjMJ5f.JZsc8Obvm3utaqUhlQ48cZ6jGzLAh5JnUw3AfFFYaq",
-      "name": "perii",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 20
-    },
-    {
-      "email": "pikkhhhkr@hotmail.it",
-      "password": "$2a$10$IsNlkWAAaF10fe2GOrNrE.F3Sbh0IU7vf0WfnGR.nqumtmM.GySOK",
-      "name": "periiff",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 21
-    },
-    {
-      "email": "pikkhhh'''''kr@hotmail.it",
-      "password": "$2a$10$1gPNbtoBSBnLfQycmqR7wue3UnKz5FikYsuQkXqw//NO1V45/AayC",
-      "name": "periiffjjjj",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 22
-    },
-    {
-      "email": "adsada@hotmail.it",
-      "password": "$2a$10$P1sfmi8uKHO.fmq6xqX5hOgEUZ2FF8a6JeBXOVJ8gXydeG0LjpPrG",
-      "name": "dsadsaa",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 23
-    },
-    {
-      "email": "sadasa@hotmail.it",
-      "password": "$2a$10$q6BcO7Bf7UyMwfMOADo2yOUTqECyV97CDWAHoQL5lkRxRXXT2oeu.",
-      "name": "sdsds",
-      "favoriteTheme": "light",
-      "avatar": {
-        "type": "",
-        "uri": ""
-      },
-      "cart": [],
-      "address": {
-        "address": "",
-        "city": "",
-        "state": "",
-        "country": "",
-        "zipcode": ""
-      },
-      "id": 24
     }
   ],
   "products": []
