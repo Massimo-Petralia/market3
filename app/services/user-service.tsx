@@ -1,6 +1,6 @@
 import {User} from '../../models/models';
-const usersURL = 'http://192.168.1.101:3000/users';
-const signinURL = 'http://192.168.1.101:3000/signin';
+const usersURL = 'http://192.168.1.100:3000/users';
+const signinURL = 'http://192.168.1.100:3000/signin';
 class UserService {
   createUser = (user: User) => {
     return fetch(usersURL, {

@@ -8,15 +8,15 @@ export type AuthStackParamList = {
     [Routes.Auth.Signup]: undefined
 }
 
-export type ProfileStackParamList = {
-    [Routes.MainTabs.ProfileStack.User]: undefined;
-    [Routes.MainTabs.ProfileStack.Address]: undefined
+export type UserStackParamList = {
+    [Routes.MainTabs.UserStack.Profile]: undefined;
+    [Routes.MainTabs.UserStack.Address]: undefined
 }
 
 export type MainTabsParamList = {
     [Routes.MainTabs.HomeStack.index]: NavigatorScreenParams<HomeStackParamList>;
 
-    [Routes.MainTabs.ProfileStack.index]: NavigatorScreenParams<ProfileStackParamList>;
+    [Routes.MainTabs.UserStack.index]: NavigatorScreenParams<UserStackParamList>;
     [Routes.MainTabs.Sell]: undefined;
     [Routes.MainTabs.Cart]: undefined;
 };
@@ -53,8 +53,8 @@ export type HomeStackNavigationProp = CompositeNavigationProp<
 >
 
 export type ProfileStackNavigationProp = CompositeNavigationProp<
-NativeStackNavigationProp<ProfileStackParamList, 'User'>,
-NativeStackNavigationProp<ProfileStackParamList>
+NativeStackNavigationProp<UserStackParamList, 'Profile'>,
+NativeStackNavigationProp<UserStackParamList>
 >
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
