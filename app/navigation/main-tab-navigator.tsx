@@ -10,6 +10,7 @@ import { CartPage } from '../features/cart/cart-page';
 import { MainTabsParamList } from './navigation-types';
 import { UserProfilePage } from '../features/user/user-profile/user-profile-page';
 import { FormProductPage } from '../features/form-product/form-product-page';
+import { ProfileNavigator } from './profile-navigator';
 
 const Tab = createMaterialBottomTabNavigator<MainTabsParamList>();
 
@@ -25,7 +26,7 @@ export const MainTabNavigator = () => {
           if (route.name === Routes.MainTabs.HomeStack.index) {
             iconName = focused ? 'home-circle' : 'home-circle-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
-          } else if (route.name === Routes.MainTabs.User) {
+          } else if (route.name === Routes.MainTabs.ProfileStack.index) {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
             color = focused ? theme.colors.primary : theme.colors.secondary;
           } else if (route.name === Routes.MainTabs.Sell) {
@@ -42,7 +43,7 @@ export const MainTabNavigator = () => {
         },
       })}>
       <Tab.Screen name={Routes.MainTabs.HomeStack.index} component={HomeNavigator} />
-      <Tab.Screen name={Routes.MainTabs.User} component={UserProfilePage} />
+      <Tab.Screen name={Routes.MainTabs.ProfileStack.index} component={ProfileNavigator} />
       <Tab.Screen name={Routes.MainTabs.Sell} component={FormProductPage} />
       <Tab.Screen name={Routes.MainTabs.Cart} component={CartPage} />
     </Tab.Navigator>

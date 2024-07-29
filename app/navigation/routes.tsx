@@ -10,7 +10,12 @@ export const Routes = {
       Home: 'Home',
       ProductDetail: 'ProductDetail'
     },
-    User: 'User',
+    ProfileStack: {
+      index: 'ProfileStack',
+      Address: 'Address',
+      User: 'User',
+    },
+    
     Sell: 'Sell',
     Cart: 'Cart'
   },
