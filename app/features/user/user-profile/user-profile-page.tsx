@@ -30,7 +30,7 @@ export const UserProfilePage = () => {
 
   return (
     <>
-      <UserProfile onLogout={onLogout} />
+      <UserProfile onLogout={onLogout} userDetail={userDetail} />
     </>
   );
 };
