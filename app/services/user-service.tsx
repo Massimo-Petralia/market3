@@ -23,6 +23,18 @@ class UserService {
       body: JSON.stringify({email, password}),
     });
   };
+
+updateUserProperty = (id: number,{key : property}:{key: keyof User, property: Partial<User>})=> {
+  return fetch(`${usersURL}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({key: property})
+  })
+}
+
 }
 
 export const userService = new UserService()

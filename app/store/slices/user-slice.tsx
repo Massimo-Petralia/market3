@@ -67,6 +67,25 @@ const userSlice = createSlice({
     logoutUser: state => {
       return {...state, accessToken: '', user: DefaultUser};
     },
+
+    patchUserProperty: (state, action) => {
+      console.log('Action', action.type);
+      if (state.loadingState === 'idle') {
+        return {...state, loadingState: 'loading'};
+      }
+    },
+    patchUserPropertySuccess: (
+      state,
+      action: PayloadAction<{key: keyof User; property: Partial<User>}>,
+    ) => {
+      const {key, property} = action.payload;
+      return {...state, user: {...state.user, [key]: property}};
+    },
+    patchUserPropertyFailed: (state, action: PayloadAction<string>) => {
+      if (state.loadingState === 'loading') {
+        return {...state, loadingState: 'idle'};
+      }
+    },
   },
 });
 
@@ -78,7 +97,10 @@ export const {
   signinUser,
   signinUserSuccess,
   signinUserFailed,
-  logoutUser
+  logoutUser,
+  patchUserProperty,
+  patchUserPropertySuccess,
+  patchUserPropertyFailed,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
@@ -148,6 +170,26 @@ class UserThunks {
           }
         })
         .catch((error: Error) => dispatch(signinUserFailed(error.message)));
+    };
+  patchUserPropertyThunk =
+    (id: number, {key, property}: {key: keyof User; property: Partial<User>}) =>
+    async (dispatch: Dispatch) => {
+      dispatch(patchUserProperty(null));
+      userService
+        .updateUserProperty(id, {key, property})
+        .then(async response => {
+          const notification: Notification = {
+            type: 'info',
+            text: `${key} updated !`,
+            compType: 'snackbar',
+          };
+          dispatch(patchUserPropertySuccess({key, property}));
+          dispatch(setNotification(notification));
+          dispatch(toggleNotification());
+        })
+        .catch((error: Error) =>
+          dispatch(patchUserPropertyFailed(error.message)),
+        );
     };
 }
 
