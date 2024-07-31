@@ -1,6 +1,6 @@
 import {User} from '../../models/models';
-const usersURL = 'http://192.168.1.100:3000/users';
-const signinURL = 'http://192.168.1.100:3000/signin';
+const usersURL = 'http://192.168.1.101:3000/users';
+const signinURL = 'http://192.168.1.101:3000/signin';
 class UserService {
   createUser = (user: User) => {
     return fetch(usersURL, {
@@ -24,14 +24,14 @@ class UserService {
     });
   };
 
-updateUserProperty = (id: number,{key : property}:{key: keyof User, property: Partial<User>})=> {
+updateUserProperty = (id: number,key :keyof User, value: Partial<User>)=> {
   return fetch(`${usersURL}/${id}`, {
     method: 'PATCH',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({key: property})
+    body: JSON.stringify({[key]: value})
   })
 }
 

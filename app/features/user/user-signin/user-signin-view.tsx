@@ -64,6 +64,7 @@ export const UserSignin = ({
       <View style={style.infoArea}>
         <Text style={{alignSelf: 'center'}}>If you are new</Text>
         <Button
+        style={{marginTop: 10}}
           mode="text"
           onPress={() => navigation.navigate(Routes.Auth.Signup)}>
           Go to Signup

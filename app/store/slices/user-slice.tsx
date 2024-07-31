@@ -17,6 +17,7 @@ const userSlice = createSlice({
     accessToken: '',
     user: DefaultUser,
     isCreated: false,
+    patchSuccess : false
   },
   reducers: {
     createUser: (state, action) => {
@@ -71,7 +72,7 @@ const userSlice = createSlice({
     patchUserProperty: (state, action) => {
       console.log('Action', action.type);
       if (state.loadingState === 'idle') {
-        return {...state, loadingState: 'loading'};
+        return {...state, loadingState: 'loading', patchSuccess: false};
       }
     },
     patchUserPropertySuccess: (
@@ -79,13 +80,16 @@ const userSlice = createSlice({
       action: PayloadAction<{key: keyof User; property: Partial<User>}>,
     ) => {
       const {key, property} = action.payload;
-      return {...state, user: {...state.user, [key]: property}};
+      return {...state, user: {...state.user, [key]: property}, patchSuccess: true};
     },
     patchUserPropertyFailed: (state, action: PayloadAction<string>) => {
       if (state.loadingState === 'loading') {
-        return {...state, loadingState: 'idle'};
+        return {...state, loadingState: 'idle', patchSuccess: false};
       }
     },
+    resetPatchSuccess : (state)=> {
+      return {...state, patchSuccess: false}
+    }
   },
 });
 
@@ -101,6 +105,7 @@ export const {
   patchUserProperty,
   patchUserPropertySuccess,
   patchUserPropertyFailed,
+  resetPatchSuccess
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
@@ -172,11 +177,12 @@ class UserThunks {
         .catch((error: Error) => dispatch(signinUserFailed(error.message)));
     };
   patchUserPropertyThunk =
-    (id: number, {key, property}: {key: keyof User; property: Partial<User>}) =>
+    (id: number, key: keyof User, property: Partial<User>) =>
+     
     async (dispatch: Dispatch) => {
       dispatch(patchUserProperty(null));
       userService
-        .updateUserProperty(id, {key, property})
+        .updateUserProperty(id, key, property)
         .then(async response => {
           const notification: Notification = {
             type: 'info',

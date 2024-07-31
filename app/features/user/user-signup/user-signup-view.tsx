@@ -12,8 +12,6 @@ import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 export const UserSignup = ({
   onSignup,
   loadingState,
-  isVisible,
-  notification,
 }: {
   onSignup: (user: User) => void;
   loadingState: LoadingState;
@@ -106,17 +104,10 @@ export const UserSignup = ({
         </Button>
       </View>
 
-      {/* {isVisible && notification.type === 'info' ? (
-        <View style={style.notificationArea}>
-          <Text variant="bodyMedium" style={{color: style.infoText.color}}>
-            You can sign in with your credentials
-          </Text>
-        </View>
-      ) : null} */}
-
       <View style={style.infoArea}>
         <Text>If you are already registered</Text>
         <Button
+          style={{marginTop: 10}}
           mode="text"
           onPress={() => navigation.navigate(Routes.Auth.Signin)}>
           Go to Signin

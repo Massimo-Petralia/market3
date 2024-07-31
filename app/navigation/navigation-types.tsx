@@ -52,7 +52,7 @@ export type HomeStackNavigationProp = CompositeNavigationProp<
     NativeStackNavigationProp<HomeStackParamList>
 >
 
-export type ProfileStackNavigationProp = CompositeNavigationProp<
+export type UserStackNavigationProp = CompositeNavigationProp<
 NativeStackNavigationProp<UserStackParamList, 'Profile'>,
 NativeStackNavigationProp<UserStackParamList>
 >

@@ -1,16 +1,16 @@
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import { useTheme } from 'react-native-paper';
+import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
+import {useTheme} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { HomeNavigator } from './home-navigator';
+import {HomeNavigator} from './home-navigator';
 import Routes from './routes';
 
-import { AuthNavigator } from './auth-navigator';
-import { ProductDetailPage } from '../features/product-detail/product-detail-page';
-import { CartPage } from '../features/cart/cart-page';
-import { MainTabsParamList } from './navigation-types';
-import { UserProfilePage } from '../features/user/user-profile/user-profile-page';
-import { FormProductPage } from '../features/form-product/form-product-page';
-import { UserNavigator } from './user-navigator';
+import {AuthNavigator} from './auth-navigator';
+import {ProductDetailPage} from '../features/product-detail/product-detail-page';
+import {CartPage} from '../features/cart/cart-page';
+import {MainTabsParamList} from './navigation-types';
+import {UserProfilePage} from '../features/user/user-profile/user-profile-page';
+import {FormProductPage} from '../features/form-product/form-product-page';
+import {UserNavigator} from './user-navigator';
 
 const Tab = createMaterialBottomTabNavigator<MainTabsParamList>();
 
@@ -18,8 +18,8 @@ export const MainTabNavigator = () => {
   const theme = useTheme();
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => {
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused}) => {
           const size = 26;
           let iconName = '';
           let color = '';
@@ -42,8 +42,14 @@ export const MainTabNavigator = () => {
           );
         },
       })}>
-      <Tab.Screen name={Routes.MainTabs.HomeStack.index} component={HomeNavigator} />
-      <Tab.Screen name={Routes.MainTabs.UserStack.index} component={UserNavigator} />
+      <Tab.Screen
+        name={Routes.MainTabs.HomeStack.index}
+        component={HomeNavigator}
+      />
+      <Tab.Screen
+        name={Routes.MainTabs.UserStack.index}
+        component={UserNavigator}
+      />
       <Tab.Screen name={Routes.MainTabs.Sell} component={FormProductPage} />
       <Tab.Screen name={Routes.MainTabs.Cart} component={CartPage} />
     </Tab.Navigator>
