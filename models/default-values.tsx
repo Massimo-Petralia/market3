@@ -10,7 +10,6 @@ export const DefaultAddress: Address = {
 
 export const DefaultUser: User = {
   id: undefined,
-  //accessTokken: '',
   name: '',
   favoriteTheme: 'light',
   avatar: {type: '', uri: ''},

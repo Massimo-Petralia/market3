@@ -5,11 +5,11 @@ import {HomeNavigator} from './home-navigator';
 import Routes from './routes';
 
 import {AuthNavigator} from './auth-navigator';
-import {ProductDetailPage} from '../features/product-detail/product-detail-page';
+import {ProductDetailPage} from '../features/product/product-detail/product-detail-page';
 import {CartPage} from '../features/cart/cart-page';
 import {MainTabsParamList} from './navigation-types';
 import {UserProfilePage} from '../features/user/user-profile/user-profile-page';
-import {FormProductPage} from '../features/form-product/form-product-page';
+import {FormProductPage} from '../features/product/form-product/form-product-page';
 import {UserNavigator} from './user-navigator';
 
 const Tab = createMaterialBottomTabNavigator<MainTabsParamList>();

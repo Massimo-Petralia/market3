@@ -24,7 +24,7 @@ export type Product = {
   price: string;
   currency: '€' | '$';
   images: string[];
-  userId?: number | null;
+  userId?: number;
 };
 export type Currency = '€' | '$';
 
