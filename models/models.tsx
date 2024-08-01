@@ -22,7 +22,7 @@ export type Product = {
   name: string;
   description: string;
   price: string;
-  currency: '€' | '$';
+  currency: Currency;
   images: string[];
   userId?: number;
 };

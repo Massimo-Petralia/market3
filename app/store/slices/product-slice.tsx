@@ -11,7 +11,7 @@ const productSlice = createSlice({
     product: DefaultProduct,
   },
   reducers: {
-    createProduct: (state, action) => {//con userId
+    createProduct: (state, action) => {
       console.log('Action: ', action.type);
       if (state.loadingState === 'idle') {
         return {...state, loadingState: 'loading'};
