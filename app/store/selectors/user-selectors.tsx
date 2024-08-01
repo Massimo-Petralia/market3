@@ -18,6 +18,11 @@ export const selectIsCreated = createSelector(
     (user) => user.isCreated
 )
 
+export const selectPatchSuccess = createSelector(
+    [selectUser],
+    (user)=> user.patchSuccess
+)
+
 export const selectAccessToken = createSelector(
     [selectUser],
     ({accessToken})=> accessToken

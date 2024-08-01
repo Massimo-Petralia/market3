@@ -28,9 +28,8 @@ export const UserSigninPage = () => {
         screen: Routes.MainTabs.HomeStack.index,
         params: {screen: Routes.MainTabs.HomeStack.Home},
       });
-      console.log('user signin name: ', user.name)
     }
-  }, [accessToken, user]);
+  }, [accessToken, user.id]);
 
   return (
     <>

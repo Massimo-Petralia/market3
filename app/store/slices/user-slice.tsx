@@ -17,6 +17,7 @@ const userSlice = createSlice({
     accessToken: '',
     user: DefaultUser,
     isCreated: false,
+    patchSuccess : false
   },
   reducers: {
     createUser: (state, action) => {
@@ -67,6 +68,28 @@ const userSlice = createSlice({
     logoutUser: state => {
       return {...state, accessToken: '', user: DefaultUser};
     },
+
+    patchUserProperty: (state, action) => {
+      console.log('Action', action.type);
+      if (state.loadingState === 'idle') {
+        return {...state, loadingState: 'loading', patchSuccess: false};
+      }
+    },
+    patchUserPropertySuccess: (
+      state,
+      action: PayloadAction<{key: keyof User; property: Partial<User>}>,
+    ) => {
+      const {key, property} = action.payload;
+      return {...state, user: {...state.user, [key]: property}, patchSuccess: true};
+    },
+    patchUserPropertyFailed: (state, action: PayloadAction<string>) => {
+      if (state.loadingState === 'loading') {
+        return {...state, loadingState: 'idle', patchSuccess: false};
+      }
+    },
+    resetPatchSuccess : (state)=> {
+      return {...state, patchSuccess: false}
+    }
   },
 });
 
@@ -78,7 +101,11 @@ export const {
   signinUser,
   signinUserSuccess,
   signinUserFailed,
-  logoutUser
+  logoutUser,
+  patchUserProperty,
+  patchUserPropertySuccess,
+  patchUserPropertyFailed,
+  resetPatchSuccess
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
@@ -148,6 +175,27 @@ class UserThunks {
           }
         })
         .catch((error: Error) => dispatch(signinUserFailed(error.message)));
+    };
+  patchUserPropertyThunk =
+    (id: number, key: keyof User, property: Partial<User>) =>
+     
+    async (dispatch: Dispatch) => {
+      dispatch(patchUserProperty(null));
+      userService
+        .updateUserProperty(id, key, property)
+        .then(async response => {
+          const notification: Notification = {
+            type: 'info',
+            text: `${key} updated !`,
+            compType: 'snackbar',
+          };
+          dispatch(patchUserPropertySuccess({key, property}));
+          dispatch(setNotification(notification));
+          dispatch(toggleNotification());
+        })
+        .catch((error: Error) =>
+          dispatch(patchUserPropertyFailed(error.message)),
+        );
     };
 }
 

@@ -1,6 +1,5 @@
 import {UserProfile} from './user-profile-view';
-import {useSelector, UseSelector} from 'react-redux';
-import {UserAuth} from '../../../../models/models';
+import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../../store/slices/user-slice';
 import {
@@ -30,7 +29,7 @@ export const UserProfilePage = () => {
 
   return (
     <>
-      <UserProfile onLogout={onLogout} />
+      <UserProfile onLogout={onLogout} userDetail={userDetail} />
     </>
   );
 };
