@@ -1,9 +1,17 @@
-import {View} from 'react-native';
-import {Text, ActivityIndicator, TextInput, Button} from 'react-native-paper';
+import {View, Pressable, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  ActivityIndicator,
+  TextInput,
+  Button,
+  Menu,
+  useTheme,
+} from 'react-native-paper';
 import {Currency, LoadingState, Product} from '../../../../models/models';
 import {useEffect, useState} from 'react';
 import {DefaultProduct} from '../../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const FormProduct = ({
   onCreateProduct,
@@ -14,11 +22,18 @@ export const FormProduct = ({
   loadingState: LoadingState;
   product: Product;
 }) => {
+  const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
 
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
   };
+
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
 
   const handleNameChanges = (name: string) => {
     updateFormProduct('name', name);
@@ -49,17 +64,96 @@ export const FormProduct = ({
     );
   }
   return (
-    <View>
-      <View id="form-product">
-        <Text>Form product work !</Text>
+    <ScrollView>
+      <View id="form-product" style={{marginHorizontal: 20}}>
+        <TextInput
+          style={{marginVertical: 10}}
+          label="Name"
+          value={formProduct.name}
+          onChangeText={name => handleNameChanges(name)}
+        />
+        <TextInput
+          style={{marginVertical: 10}}
+          label="Description"
+          value={formProduct.description}
+          onChangeText={description => handleDescriptionChanges(description)}
+        />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TextInput
+            style={{marginVertical: 10, minWidth: 150}}
+            label="Price"
+            value={formProduct.price}
+            onChangeText={price => handlePriceChanges(price)}
+          />
+          <Menu
+            style={{borderRadius: 20}}
+            visible={visible}
+            onDismiss={closeMenu}
+            anchorPosition="bottom"
+            anchor={
+              <Pressable
+                style={[
+                  style.currencyPressable,
+                  {backgroundColor: theme.colors.primary},
+                ]}
+                onPress={() => openMenu()}>
+                <Text
+                  style={{color: theme.colors.onPrimary}}
+                  variant="bodyLarge">
+                  {formProduct.currency + ' Currency '}{' '}
+                </Text>
+                {!visible ? (
+                  <>
+                    <FontAwesome
+                      color={theme.colors.onPrimary}
+                      size={18}
+                      name="caret-right"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <FontAwesome
+                      color={theme.colors.onPrimary}
+                      size={18}
+                      name="caret-down"
+                    />
+                  </>
+                )}
+              </Pressable>
+            }>
+            <Menu.Item
+              onPress={() => {
+                handleCurrencyChanges('€');
+                closeMenu();
+              }}
+              title="€ Euro"
+            />
+            <Menu.Item
+              onPress={() => {
+                handleCurrencyChanges('$');
+                closeMenu();
+              }}
+              title="$ Dollar"
+            />
+          </Menu>
+        </View>
         <ImagesPreview handleImagesChanges={handleImagesChanges} />
-        <Button
-          style={{marginHorizontal: 20}}
-          mode="contained"
-          onPress={() => onCreateProduct(formProduct)}>
+        <Button mode="contained" onPress={() => onCreateProduct(formProduct)}>
           Save
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
+
+const style = StyleSheet.create({
+  currencyPressable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 20,
+    width: 125
+  },
+});

@@ -37,7 +37,7 @@ export const ImagesPreview = ({
     }
   }, []);
   return (
-    <View style={{marginHorizontal: 20}}>
+    <View>
       <PagerView
         useNext
         initialPage={0}
