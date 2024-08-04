@@ -15,12 +15,16 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const FormProduct = ({
   onCreateProduct,
+  onUpdateProduct,
   loadingState,
   product,
+  userId,
 }: {
   onCreateProduct: (product: Product) => void;
+  onUpdateProduct: (product: Product) => void;
   loadingState: LoadingState;
   product: Product;
+  userId: number | undefined;
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
@@ -54,6 +58,7 @@ export const FormProduct = ({
 
   useEffect(() => {
     setFormProduct(product);
+    console.log('product setted: ', product);
   }, [product]);
 
   if (loadingState === 'loading') {
@@ -64,8 +69,20 @@ export const FormProduct = ({
     );
   }
   return (
-    <ScrollView>
+    <View>
       <View id="form-product" style={{marginHorizontal: 20}}>
+        <Button
+          mode="contained"
+          onPress={() => {
+            if (!product.id) {
+              onCreateProduct(formProduct);
+            }
+            if (product.userId === userId) {
+              onUpdateProduct(formProduct);
+            }
+          }}>
+          Save
+        </Button>
         <TextInput
           style={{marginVertical: 10}}
           label="Name"
@@ -137,12 +154,12 @@ export const FormProduct = ({
             />
           </Menu>
         </View>
-        <ImagesPreview handleImagesChanges={handleImagesChanges} />
-        <Button mode="contained" onPress={() => onCreateProduct(formProduct)}>
-          Save
-        </Button>
+        <ImagesPreview
+          imagesNode={formProduct.images}
+          handleImagesChanges={handleImagesChanges}
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -154,6 +171,6 @@ const style = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
-    width: 125
+    width: 125,
   },
 });

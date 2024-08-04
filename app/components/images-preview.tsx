@@ -2,15 +2,17 @@ import {View, Image} from 'react-native';
 import {pick, types} from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
 import PagerView from 'react-native-pager-view';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Divider, Text, useTheme} from 'react-native-paper';
 import {DotIndicator} from './dot-indicator';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const ImagesPreview = ({
   handleImagesChanges,
+  imagesNode
 }: {
   handleImagesChanges: (images: string[]) => void;
+  imagesNode: string[]
 }) => {
   const theme = useTheme();
   const [images, setImages] = useState<string[]>([]);
@@ -36,6 +38,11 @@ export const ImagesPreview = ({
       console.error('Error: ', error);
     }
   }, []);
+
+useEffect(()=>{
+  setImages(imagesNode)
+},[imagesNode])
+
   return (
     <View>
       <PagerView
