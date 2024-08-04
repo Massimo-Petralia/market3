@@ -27,3 +27,8 @@ export const selectAccessToken = createSelector(
     [selectUser],
     ({accessToken})=> accessToken
 )
+
+export const selectUserId = createSelector(
+    [selectUser],
+    ({user})=> user.id
+)
