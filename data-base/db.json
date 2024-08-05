@@ -179,6 +179,60 @@
       ],
       "userId": 1,
       "id": 4
+    },
+    {
+      "name": "some new item",
+      "description": "asasa",
+      "price": "5454",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "name": "coldotto",
+      "description": "pricesd",
+      "price": "222",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "name": "moschino",
+      "description": "gfgf",
+      "price": "22121",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "name": "dalmazia",
+      "description": "gfgfjhkj",
+      "price": "22",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "name": "eurasia",
+      "description": "gjhkj",
+      "price": "2299",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "name": "berlina",
+      "description": "gjooohkj",
+      "price": "229999",
+      "currency": "€",
+      "images": [],
+      "userId": 1,
+      "id": 10
     }
   ]
 }
