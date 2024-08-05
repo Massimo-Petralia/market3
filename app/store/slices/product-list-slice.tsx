@@ -9,7 +9,7 @@ const productListSlice = createSlice({
   initialState: {
     loadingState: 'idle' as LoadingState,
     productList: defaultProductList,
-    currentPage: 0
+    currentPage: 1
   },
   reducers: {
     getProductList: (state, action) => {
@@ -51,6 +51,7 @@ class ProductListThunks {
   getProductList = (page: number) => async (dispatch: Dispatch)=> {
     dispatch(getProductList(null))
     productService.getProductList(page).then(async response => {
+      console.log('response: ', response.headers.get('link'))
       const data : Product[] = await response.json()
       dispatch(getProductListSuccess(data))
     }).catch((error: Error)=>dispatch(getProductListFailed(error.message)))

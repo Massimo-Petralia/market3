@@ -32,7 +32,7 @@ class ProductService {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
   };
 }
 
