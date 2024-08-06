@@ -1,44 +1,56 @@
-import {View} from 'react-native';
+import {View, FlatList, Dimensions} from 'react-native';
 import {Text} from 'react-native-paper';
-import {ProductList} from '../../../models/models';
-import PagerView from 'react-native-pager-view';
+import {Product, ProductList} from '../../../models/models';
+import {useState, useEffect, useRef} from 'react';
 
 export const ProductsList = ({
   currentPage,
   productList,
-  handleNextPage,
+  onLastElement,
+  onNextPage,
+  isLastElement,
 }: {
   currentPage: number;
   productList: ProductList;
-  handleNextPage: () => void;
+  onLastElement: () => void;
+  onNextPage: () => void;
+  isLastElement: boolean;
 }) => {
-  const products = Object.values(productList);
+  const flatListRef = useRef<FlatList<Product>>(null);
+  const {width} = Dimensions.get('window');
+  const [products, setProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    setProducts(Object.values(productList));
+    if (Object.values(productList).length > 0) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToIndex({ index: 0, animated: true });
+      }, 100);
+    }
+  }, [productList]);
   return (
     <View>
-      <PagerView
-        id="main-product-list"
-        useNext
-        initialPage={1}
-        onPageSelected={event => {
-          const currentPosition = event.nativeEvent.position;
-          console.log(
-            'current position: ',
-            currentPosition,
-            ' current page: ',
-            currentPage,
-            'products length: ',
-            products.length,
-          );
-          if (currentPosition === products.length - 1) {
-            handleNextPage();
-          }
-        }}>
-        {products.map((product, index) => (
-          <View key={index}>
-            <Text>{product.name}</Text>
-          </View>
-        ))}
-      </PagerView>
+      <FlatList
+        ref={flatListRef}
+        data={products}
+        pagingEnabled
+        snapToInterval={width}
+        decelerationRate={'fast'}
+        onEndReached={() => {
+          onLastElement(), console.log('last element reached');
+        }}
+        // onViewableItemsChanged={()=>{
+        //   if(isLastElement){
+        //     onNextPage()
+        //   }
+        // }}
+        renderItem={({item}) => (
+          <Text style={{padding: 20, backgroundColor: 'dodgerblue', width}}>
+            {item.name}
+          </Text>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+      />
     </View>
   );
 };

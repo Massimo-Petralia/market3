@@ -1,7 +1,7 @@
 import {Product} from '../../models/models';
 
-const productsURL = 'http://192.168.1.101:3000/products';
-const guardedProductUrl = 'http://192.168.1.101:3000/644/products';
+const productsURL = 'http://192.168.1.100:3000/products';
+const guardedProductUrl = 'http://192.168.1.100:3000/644/products';
 class ProductService {
   createProduct = (product: Product) => {
     return fetch(productsURL, {
