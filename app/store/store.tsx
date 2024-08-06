@@ -3,6 +3,7 @@ import {themeReducer} from './slices/theme-slice';
 import {alertsReducer} from './slices/alerts-slice';
 import {userReducer} from './slices/user-slice';
 import {productReducer} from './slices/product-slice';
+import { productListReducer } from './slices/product-list-slice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     alerts: alertsReducer,
     user: userReducer,
     product: productReducer,
+    productList: productListReducer
   },
 });
 
