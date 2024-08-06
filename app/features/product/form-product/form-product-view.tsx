@@ -1,4 +1,4 @@
-import {View, Pressable, StyleSheet } from 'react-native';
+import {View, Pressable, StyleSheet} from 'react-native';
 import {
   Text,
   ActivityIndicator,
@@ -18,13 +18,11 @@ export const FormProduct = ({
   onUpdateProduct,
   loadingState,
   product,
-  
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
   loadingState: LoadingState;
   product: Product;
- 
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
@@ -69,13 +67,13 @@ export const FormProduct = ({
     <View>
       <View id="form-product" style={{marginHorizontal: 20}}>
         <Button
+          style={{marginBottom: 5}}
           mode="contained"
           onPress={() => {
             if (!formProduct.id) {
               onCreateProduct(formProduct);
-              setFormProduct(DefaultProduct)
+              setFormProduct(DefaultProduct);
             }
-           
           }}>
           Save
         </Button>
