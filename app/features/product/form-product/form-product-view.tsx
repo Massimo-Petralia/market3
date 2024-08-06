@@ -1,4 +1,4 @@
-import {View, Pressable, StyleSheet, ScrollView} from 'react-native';
+import {View, Pressable, StyleSheet } from 'react-native';
 import {
   Text,
   ActivityIndicator,
@@ -18,13 +18,13 @@ export const FormProduct = ({
   onUpdateProduct,
   loadingState,
   product,
-  userId,
+  
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
   loadingState: LoadingState;
   product: Product;
-  userId: number | undefined;
+ 
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
@@ -56,10 +56,7 @@ export const FormProduct = ({
     updateFormProduct('images', images);
   };
 
-  useEffect(() => {
-    setFormProduct(product);
-    console.log('product setted: ', product);
-  }, [product]);
+  useEffect(() => {}, []);
 
   if (loadingState === 'loading') {
     return (
@@ -74,12 +71,11 @@ export const FormProduct = ({
         <Button
           mode="contained"
           onPress={() => {
-            if (!product.id) {
+            if (!formProduct.id) {
               onCreateProduct(formProduct);
+              setFormProduct(DefaultProduct)
             }
-            if (product.userId === userId) {
-              onUpdateProduct(formProduct);
-            }
+           
           }}>
           Save
         </Button>

@@ -87,7 +87,6 @@ class ProductThuks {
           dispatch(updateProductSuccess(product))
           dispatch(setNotification(notification))
           dispatch(toggleNotification())
-          //console.log('product: ', product)
         }
       }).catch((error: Error) => dispatch(updateProductFailed(error.message)))
     }

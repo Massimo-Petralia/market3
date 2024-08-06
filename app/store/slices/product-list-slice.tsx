@@ -9,9 +9,6 @@ const productListSlice = createSlice({
   initialState: {
     loadingState: 'idle' as LoadingState,
     productList: defaultProductList,
-    currentPage: 1,
-    totalProducts: 0,
-    isLastElement: false,
   },
   reducers: {
     getProductList: (state, action) => {
@@ -22,7 +19,7 @@ const productListSlice = createSlice({
     },
     getProductListSuccess: (
       state,
-      action: PayloadAction<{products: Product[]; total: number}>,
+      action: PayloadAction<{products: Product[]}>,
     ) => {
       const productList: {[id: number]: Product} =
         action.payload.products.reduce(
@@ -32,12 +29,9 @@ const productListSlice = createSlice({
           },
           {},
         );
-      const totalProducts = action.payload.total;
       return {
         ...state,
         productList,
-        totalProducts,
-        isLastElement: false,
         loadingState: 'idle',
       };
     },
@@ -46,39 +40,29 @@ const productListSlice = createSlice({
         return {...state, loadingState: 'idle'};
       }
     },
-    incrementPage: state => {
-      const page = state.currentPage + 1;
-      return {...state, currentPage: page};
-    },
+ 
   setIsLastElementTrue :(state)=>{
     return {...state, isLastElement: true}
   },
-    // decrementPage: (state, acion) => {
-    //   const page = state.currentPage - 1;
-    //   return {...state, currentPage: page};
-    // },
-  },
+ 
+  }
 });
 
 export const {
   getProductList,
   getProductListSuccess,
   getProductListFailed,
-  incrementPage,
-  setIsLastElementTrue
 } = productListSlice.actions;
 export const productListReducer = productListSlice.reducer;
 
 class ProductListThunks {
-  getProductList = (page: number) => async (dispatch: Dispatch) => {
+  getProductList = () => async (dispatch: Dispatch) => {
     dispatch(getProductList(null));
     productService
-      .getProductList(page)
+      .getProductList()
       .then(async response => {
-       // console.log('response: ', response.headers.get('link'));
-        const total: number = Number(response.headers.get('X-Total-Count'));
         const data: Product[] = await response.json();
-        dispatch(getProductListSuccess({products: data, total}));
+        dispatch(getProductListSuccess({products: data}));
       })
       .catch((error: Error) => dispatch(getProductListFailed(error.message)));
   };

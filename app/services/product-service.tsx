@@ -24,9 +24,8 @@ class ProductService {
       body: JSON.stringify(product),
     });
   };
-  getProductList = (page: number) => {
-    console.log('service page: ', page)
-    return fetch(`${productsURL}/?_page=${page}&_limit=5`, {
+  getProductList = () => {
+    return fetch(`${productsURL}/?_page=1&_limit=10`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

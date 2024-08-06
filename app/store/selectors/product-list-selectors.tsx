@@ -8,12 +8,3 @@ export const selectProducts = createSelector(
   ({productList}) => productList,
 );
 
-export const selectCurrentPage = createSelector(
-  [selectProductList],
-  productList => productList.currentPage,
-);
-
-export const selectIsLastElement = createSelector(
-  [selectProductList],
-  productList => productList.isLastElement,
-);
