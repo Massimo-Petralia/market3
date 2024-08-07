@@ -1,4 +1,4 @@
-import {View, FlatList, Dimensions, Image} from 'react-native';
+import {View, FlatList, Dimensions, Image, ScrollView} from 'react-native';
 import {Text, Card, Divider, ActivityIndicator} from 'react-native-paper';
 import {LoadingState, Product} from '../../../models/models';
 import {useEffect, useRef} from 'react';
@@ -27,7 +27,7 @@ export const ProductsList = ({
     );
   }
   return (
-    <View>
+    <ScrollView>
       <FilteredSearch
         productList={filteredProducts}
         loadingState={loadingState}
@@ -55,6 +55,6 @@ export const ProductsList = ({
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-    </View>
+    </ScrollView>
   );
 };
