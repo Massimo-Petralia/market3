@@ -32,7 +32,7 @@ export const FormUserAddressPage = () => {
   }, [patchSuccess]);
   return (
     <>
-      <FormUserAddress address={address} onPatchAddress={onPatchAddress} navigation={navigation}/>
+      <FormUserAddress address={address} onPatchAddress={onPatchAddress} />
     </>
   );
 };

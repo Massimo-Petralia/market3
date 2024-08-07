@@ -54,7 +54,7 @@ export const FormProduct = ({
     updateFormProduct('images', images);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, []);//poi settare formProduct
 
   if (loadingState === 'loading') {
     return (

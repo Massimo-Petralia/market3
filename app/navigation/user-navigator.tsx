@@ -7,9 +7,9 @@ const UserStack = createNativeStackNavigator<UserStackParamList>()
 
 export const UserNavigator = () => {
     return (
-        <UserStack.Navigator initialRouteName={Routes.MainTabs.UserStack.Profile} screenOptions={{headerShown: false}}>
-            <UserStack.Screen name={Routes.MainTabs.UserStack.Profile} component={UserProfilePage} />
-            <UserStack.Screen name={Routes.MainTabs.UserStack.Address} component={FormUserAddressPage} />
+        <UserStack.Navigator initialRouteName={Routes.MainTabs.UserStack.Profile}>
+            <UserStack.Screen name={Routes.MainTabs.UserStack.Profile} component={UserProfilePage} options={{headerShown:false}}/>
+            <UserStack.Screen name={Routes.MainTabs.UserStack.Address} component={FormUserAddressPage} options={{headerShown: true}}/>
         </UserStack.Navigator>
     )
 }

@@ -38,7 +38,7 @@ export const FilteredSearch = ({
           }}
           style={{flexGrow: 1}}
           mode="outlined"
-          placeholder="insert text..."
+          placeholder="search products..."
           value={text}
           onChangeText={text => setText(text)}
         />
