@@ -8,7 +8,7 @@ export const Routes = {
     HomeStack: {
       index: 'HomeStack',
       Home: 'Home',
-      ProductDetail: 'ProductDetail'
+      ProductDetail: 'Product detail'
     },
     UserStack: {
       index: 'User',

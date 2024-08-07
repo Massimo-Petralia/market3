@@ -113,8 +113,9 @@ class ProductListThunks {
             text: 'No results !',
             compType: 'snackbar',
           };
+          dispatch(getFilteredProductsFailed(notification.text));
           dispatch(setNotification(notification)),
-            dispatch(toggleNotification());
+          dispatch(toggleNotification());
         } else {
           dispatch(getFilteredProductsSuccess({products: data}));
         }
