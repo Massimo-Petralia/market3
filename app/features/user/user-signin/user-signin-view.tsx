@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet } from 'react-native';
 import {Text, Button, TextInput, ActivityIndicator} from 'react-native-paper';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
@@ -64,7 +64,7 @@ export const UserSignin = ({
       <View style={style.infoArea}>
         <Text style={{alignSelf: 'center'}}>If you are new</Text>
         <Button
-        style={{marginTop: 10}}
+          style={{marginTop: 10}}
           mode="text"
           onPress={() => navigation.navigate(Routes.Auth.Signup)}>
           Go to Signup
