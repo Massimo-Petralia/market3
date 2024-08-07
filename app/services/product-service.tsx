@@ -31,7 +31,16 @@ class ProductService {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    })
+    });
+  };
+  getFilteredProducts = (name: string) => {
+    return fetch(`${productsURL}?name_like=${name}&_page=1&_limit=10`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
   };
 }
 

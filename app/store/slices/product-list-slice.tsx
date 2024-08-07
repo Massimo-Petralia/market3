@@ -1,6 +1,12 @@
 import {createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
-import {LoadingState, Product, ProductList} from '../../../models/models';
+import {
+  LoadingState,
+  Notification,
+  Product,
+  ProductList,
+} from '../../../models/models';
 import {productService} from '../../services/product-service';
+import {setNotification, toggleNotification} from './alerts-slice';
 
 const defaultProductList: ProductList = {};
 
@@ -9,6 +15,7 @@ const productListSlice = createSlice({
   initialState: {
     loadingState: 'idle' as LoadingState,
     productList: defaultProductList,
+    filteredProducts: defaultProductList,
   },
   reducers: {
     getProductList: (state, action) => {
@@ -40,18 +47,46 @@ const productListSlice = createSlice({
         return {...state, loadingState: 'idle'};
       }
     },
- 
-  setIsLastElementTrue :(state)=>{
-    return {...state, isLastElement: true}
+
+    setIsLastElementTrue: state => {
+      return {...state, isLastElement: true};
+    },
+
+    getFilteredProducts: (state, action) => {
+      console.log('Action: ', action.type);
+      if (state.loadingState === 'idle') {
+        return {...state, loadingState: 'loading'};
+      }
+    },
+    getFilteredProductsSuccess: (
+      state,
+      action: PayloadAction<{products: Product[]}>,
+    ) => {
+      const filteredProducts: {[id: number]: Product} =
+        action.payload.products.reduce(
+          (collection: {[id: number]: Product}, product) => {
+            collection[product.id!] = product;
+            return collection;
+          },
+          {},
+        );
+      return {...state, filteredProducts, loadingState: 'idle'};
+    },
+    getFilteredProductsFailed: (state, action: PayloadAction<string>) => {
+      if (state.loadingState === 'loading') {
+        return {...state, loadingState: 'idle'};
+      }
+    },
   },
- 
-  }
 });
 
 export const {
   getProductList,
   getProductListSuccess,
   getProductListFailed,
+  getFilteredProducts,
+  getFilteredProductsSuccess,
+  getFilteredProductsFailed,
 } = productListSlice.actions;
 export const productListReducer = productListSlice.reducer;
 
@@ -65,6 +100,28 @@ class ProductListThunks {
         dispatch(getProductListSuccess({products: data}));
       })
       .catch((error: Error) => dispatch(getProductListFailed(error.message)));
+  };
+  getFilteredProducts = (name: string) => async (dispatch: Dispatch) => {
+    dispatch(getFilteredProducts(null));
+    productService
+      .getFilteredProducts(name)
+      .then(async response => {
+        const data: Product[] = await response.json();
+        if (data.length === 0) {
+          const notification: Notification = {
+            type: 'info',
+            text: 'No results !',
+            compType: 'snackbar',
+          };
+          dispatch(setNotification(notification)),
+            dispatch(toggleNotification());
+        } else {
+          dispatch(getFilteredProductsSuccess({products: data}));
+        }
+      })
+      .catch((error: Error) =>
+        dispatch(getFilteredProductsFailed(error.message)),
+      );
   };
 }
 
