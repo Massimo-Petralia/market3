@@ -1,4 +1,4 @@
-import {View, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable, StyleSheet, ScrollView} from 'react-native';
 import {
   Text,
   ActivityIndicator,
@@ -11,16 +11,18 @@ import {Currency, LoadingState, Product} from '../../../../models/models';
 import {useEffect, useState} from 'react';
 import {DefaultProduct} from '../../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const FormProduct = ({
   onCreateProduct,
   onUpdateProduct,
+  onDeleteProduct,
   loadingState,
   product,
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
+  onDeleteProduct: (id: number) => void;
   loadingState: LoadingState;
   product: Product;
 }) => {
@@ -54,7 +56,7 @@ export const FormProduct = ({
     updateFormProduct('images', images);
   };
 
-  useEffect(() => {}, []);//poi settare formProduct
+  useEffect(() => {}, []); //poi settare formProduct
 
   if (loadingState === 'loading') {
     return (
@@ -64,19 +66,39 @@ export const FormProduct = ({
     );
   }
   return (
-    <View>
+    <ScrollView>
       <View id="form-product" style={{marginHorizontal: 20}}>
-        <Button
-          style={{marginBottom: 5}}
-          mode="contained"
-          onPress={() => {
-            if (!formProduct.id) {
-              onCreateProduct(formProduct);
-              setFormProduct(DefaultProduct);
-            }
-          }}>
-          Save
-        </Button>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Button
+            onPress={() => {}}
+            style={{marginBottom: 5}}
+            mode="contained"
+            buttonColor={theme.colors.error}
+            textColor={theme.colors.onError}
+            icon={() => (
+              <>
+                <FontAwesome5
+                  name="trash"
+                  size={20}
+                  color={theme.colors.onError}
+                />
+              </>
+            )}>
+            Delete
+          </Button>
+          <Button
+            style={{marginBottom: 5}}
+            mode="contained"
+            onPress={() => {
+              if (!formProduct.id) {
+                onCreateProduct(formProduct);
+                setFormProduct(DefaultProduct);
+              }
+            }}>
+            Save
+          </Button>
+        </View>
+
         <TextInput
           style={{marginVertical: 10}}
           label="Name"
@@ -115,7 +137,7 @@ export const FormProduct = ({
                 </Text>
                 {!visible ? (
                   <>
-                    <FontAwesome
+                    <FontAwesome5
                       color={theme.colors.onPrimary}
                       size={18}
                       name="caret-right"
@@ -123,7 +145,7 @@ export const FormProduct = ({
                   </>
                 ) : (
                   <>
-                    <FontAwesome
+                    <FontAwesome5
                       color={theme.colors.onPrimary}
                       size={18}
                       name="caret-down"
@@ -153,7 +175,7 @@ export const FormProduct = ({
           handleImagesChanges={handleImagesChanges}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

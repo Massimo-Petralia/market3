@@ -24,6 +24,19 @@ class ProductService {
       body: JSON.stringify(product),
     });
   };
+
+  deleteProduct = (accessToken:string,id: number) => {
+    return fetch(`${guardedProductUrl}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      },
+
+    })
+  }
+
   getProductList = () => {
     return fetch(`${productsURL}/?_page=1&_limit=10`, {
       method: 'GET',
