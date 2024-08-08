@@ -1,7 +1,9 @@
-import { NavigatorScreenParams, CompositeNavigationProp } from "@react-navigation/native";
+import { NavigatorScreenParams, CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import Routes from './routes'
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MaterialBottomTabNavigationProp } from "react-native-paper";
+
+export type IsProductDetail = true
 
 export type AuthStackParamList = {
     [Routes.Auth.Signin]: undefined;
@@ -23,7 +25,7 @@ export type MainTabsParamList = {
 export type HomeStackParamList = {
 
     [Routes.MainTabs.HomeStack.Home]: undefined;
-    [Routes.MainTabs.HomeStack.ProductDetail]: { productId: string }
+    [Routes.MainTabs.HomeStack.ProductDetail]: { productId: number, isProductDetail: boolean }
 }
 
 export type RootStackParamList = {
@@ -58,3 +60,4 @@ NativeStackNavigationProp<UserStackParamList>
 >
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+export type ProductRouteProp = RouteProp<HomeStackParamList, 'Product detail'>;

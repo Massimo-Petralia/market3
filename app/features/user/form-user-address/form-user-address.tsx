@@ -1,20 +1,15 @@
-import {View, Pressable} from 'react-native';
+import {View} from 'react-native';
 import {Text, TextInput, Button, useTheme} from 'react-native-paper';
 import {Address, User} from '../../../../models/models';
 import {useState, useEffect} from 'react';
 import {DefaultAddress} from '../../../../models/default-values';
-import {UserStackNavigationProp} from '../../../navigation/navigation-types';
-import Routes from '../../../navigation/routes';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const FormUserAddress = ({
   address,
   onPatchAddress,
-  navigation,
 }: {
   address: Address;
   onPatchAddress: (address: Partial<User>) => void;
-  navigation: UserStackNavigationProp;
 }) => {
   const theme = useTheme();
   const [formValue, setFormValue] = useState<Address>(DefaultAddress);
@@ -44,16 +39,6 @@ export const FormUserAddress = ({
   }, [address]);
   return (
     <View style={{marginHorizontal: 20}}>
-      <Pressable
-      style={{alignSelf: 'flex-start', borderRadius: 50, marginVertical: 10}}
-      android_ripple={{color: theme.colors.onPrimary, radius: 20}}
-        onPress={() => navigation.navigate(Routes.MainTabs.UserStack.Profile)}>
-        <Ionicons
-          size={40}
-          color={theme.colors.primary}
-          name="arrow-back-circle-outline"
-        />
-      </Pressable>
       <View id="form-address">
         <Text>Address</Text>
         <TextInput
@@ -86,7 +71,7 @@ export const FormUserAddress = ({
           placeholder="Zipcode"
         />
         <Button
-        style={{marginVertical: 20}}
+          style={{marginVertical: 20}}
           mode="contained"
           onPress={() => onPatchAddress(formValue as unknown as Partial<User>)}>
           Save

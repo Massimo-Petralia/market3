@@ -1,30 +1,16 @@
-import {LoadingState, Product} from '../../models/models';
-import {
-  View,
-  Pressable,
-  StyleSheet,
-  Image,
-  FlatList,
-  Dimensions,
-} from 'react-native';
-import {
-  ActivityIndicator,
-  Text,
-  TextInput,
-  useTheme,
-  Card,
-  Divider,
-} from 'react-native-paper';
+import {LoadingState} from '../../models/models';
+import {View, Pressable, StyleSheet, Dimensions} from 'react-native';
+import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
 import {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const FilteredSearch = ({
   onFilteredSearch,
-  productList,
+
   loadingState,
 }: {
   onFilteredSearch: (name: string) => void;
-  productList: Product[];
+
   loadingState: LoadingState;
 }) => {
   const theme = useTheme();
@@ -52,7 +38,7 @@ export const FilteredSearch = ({
           }}
           style={{flexGrow: 1}}
           mode="outlined"
-          placeholder="insert text..."
+          placeholder="search products..."
           value={text}
           onChangeText={text => setText(text)}
         />
@@ -66,31 +52,6 @@ export const FilteredSearch = ({
           <Text style={{color: theme.colors.onPrimary}}> Search</Text>
         </Pressable>
       </View>
-      {productList.length !== 0 ? (
-        <>
-          <FlatList
-            data={productList}
-            pagingEnabled
-            snapToInterval={width}
-            decelerationRate={'fast'}
-            horizontal
-            renderItem={({item}) => (
-              <Card style={{width}}>
-                <Card.Title title={item.name} />
-                <Divider horizontalInset style={{marginBottom: 10}} />
-                <Card.Content>
-                  <Image
-                    style={{height: 200}}
-                    resizeMode="contain"
-                    source={{uri: item.images[0]}}
-                  />
-                </Card.Content>
-              </Card>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </>
-      ) : null}
     </View>
   );
 };
