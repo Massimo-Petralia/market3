@@ -1,5 +1,5 @@
 import {FormProduct} from './form-product-view';
-import {deleteProduct, productThunks} from '../../../store/slices/product-slice';
+import {productThunks} from '../../../store/slices/product-slice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../../../store/store';
 import {
@@ -24,9 +24,7 @@ export const FormProductPage = () => {
   const onUpdateProduct = (product: Product) => {
     dispatch(productThunks.updateProductThunk(accessToken, product));
   };
-  const onDeleteProduct = (id: number)=> {
-    dispatch(productThunks.deleteProductThunk(accessToken, id))
-  }
+  const onDeleteProduct = (id: number)=> {}
   return (
     <>
       <FormProduct
