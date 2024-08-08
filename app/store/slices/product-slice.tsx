@@ -3,6 +3,7 @@ import {LoadingState, Notification, Product} from '../../../models/models';
 import {DefaultProduct} from '../../../models/default-values';
 import {productService} from '../../services/product-service';
 import {setNotification, toggleNotification} from './alerts-slice';
+import { removeProduct } from './product-list-slice';
 import {selectProducts} from '../selectors/product-list-selectors';
 import {useSelector} from 'react-redux';
 
@@ -50,6 +51,7 @@ const productSlice = createSlice({
       }
     },
     deleteProductSuccess: (state, action) => {
+      console.log('Action: ', action.type);
       return {...state, loadingState: 'idle'};
     },
     deleteProductFailed: (state, action: PayloadAction<string>) => {
@@ -140,6 +142,7 @@ class ProductThuks {
           compType: 'snackbar'
         };
         dispatch(deleteProductSuccess(null))
+        dispatch(removeProduct(id))
         dispatch(setNotification(notification))
         dispatch(toggleNotification())
       }

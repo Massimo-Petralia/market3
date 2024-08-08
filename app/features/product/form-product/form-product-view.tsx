@@ -29,6 +29,10 @@ export const FormProduct = ({
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
 
+  useEffect(() => {
+    setFormProduct(product);
+  }, [product]);
+
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
   };
@@ -56,8 +60,6 @@ export const FormProduct = ({
     updateFormProduct('images', images);
   };
 
-  useEffect(() => {}, []); //poi settare formProduct
-
   if (loadingState === 'loading') {
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
@@ -68,52 +70,34 @@ export const FormProduct = ({
   return (
     <ScrollView>
       <View id="form-product" style={{marginHorizontal: 20}}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Button
-            onPress={() => {}}
-            style={{marginBottom: 5}}
-            mode="contained"
-            buttonColor={theme.colors.error}
-            textColor={theme.colors.onError}
-            icon={() => (
-              <>
-                <FontAwesome5
-                  name="trash"
-                  size={20}
-                  color={theme.colors.onError}
-                />
-              </>
-            )}>
-            Delete
-          </Button>
-          <Button
-            style={{marginBottom: 5}}
-            mode="contained"
-            onPress={() => {
-              if (!formProduct.id) {
-                onCreateProduct(formProduct);
-                setFormProduct(DefaultProduct);
-              }
-            }}>
-            Save
-          </Button>
-        </View>
+        {formProduct.id ? (
+          <View style={style.infoForm}>
+            <Text variant="bodyLarge" style={{color: 'dodgerblue'}}>
+              For add new product first{' '}
+            </Text>
+            <Button
+              mode="contained"
+              onPress={() => setFormProduct(DefaultProduct)}>
+              reset form
+            </Button>
+          </View>
+        ) : null}
 
         <TextInput
-          style={{marginVertical: 10}}
+          style={{marginVertical: 5}}
           label="Name"
           value={formProduct.name}
           onChangeText={name => handleNameChanges(name)}
         />
         <TextInput
-          style={{marginVertical: 10}}
+          style={{marginVertical: 5}}
           label="Description"
           value={formProduct.description}
           onChangeText={description => handleDescriptionChanges(description)}
         />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TextInput
-            style={{marginVertical: 10, minWidth: 150}}
+            style={{marginVertical: 5, minWidth: 150}}
             label="Price"
             value={formProduct.price}
             onChangeText={price => handlePriceChanges(price)}
@@ -131,9 +115,15 @@ export const FormProduct = ({
                 ]}
                 onPress={() => openMenu()}>
                 <Text
-                  style={{color: theme.colors.onPrimary}}
-                  variant="bodyLarge">
-                  {formProduct.currency + ' Currency '}{' '}
+                  style={{color: theme.colors.onPrimary, fontWeight: 'bold'}}
+                  variant="headlineSmall">
+                  {formProduct.currency}
+                </Text>
+                <Text
+                  variant="bodyLarge"
+                  style={{color: theme.colors.onPrimary}}>
+                  {' '}
+                  Currency{'  '}
                 </Text>
                 {!visible ? (
                   <>
@@ -174,6 +164,47 @@ export const FormProduct = ({
           imagesNode={formProduct.images}
           handleImagesChanges={handleImagesChanges}
         />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Button
+            onPress={() => {}}
+            style={{marginBottom: 5}}
+            mode="contained"
+            buttonColor={theme.colors.error}
+            textColor={theme.colors.onError}
+            icon={() => (
+              <>
+                <FontAwesome5
+                  name="trash"
+                  size={20}
+                  color={theme.colors.onError}
+                />
+              </>
+            )}>
+            Delete
+          </Button>
+          <Button
+            style={{marginBottom: 5, width: 106.7}}
+            mode="contained"
+            icon={() => (
+              <>
+                <FontAwesome5
+                  name="save"
+                  size={20}
+                  color={theme.colors.onPrimary}
+                />
+              </>
+            )}
+            onPress={() => {
+              if (!formProduct.id) {
+                onCreateProduct(formProduct);
+              }
+              if (formProduct.id) {
+                onUpdateProduct(formProduct);
+              }
+            }}>
+            Save
+          </Button>
+        </View>
       </View>
     </ScrollView>
   );
@@ -188,5 +219,11 @@ const style = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     width: 125,
+  },
+  infoForm: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
 });

@@ -61,8 +61,8 @@ export const ImagesPreview = ({
         onPageSelected={e => setCounter(e.nativeEvent.position)}>
         {images.map((image, index) => (
           <Card key={index}>
-            <Card.Title title={`Preview .${index + 1}`} />
-            <Divider horizontalInset style={{marginBottom: 15}} />
+            {/* <Card.Title title={`Preview .${index + 1}`} /> */}
+            {/* <Divider horizontalInset style={{marginBottom: 15}} /> */}
             <Card.Content>
               <Image
                 style={{height: 140}}
