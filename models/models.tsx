@@ -28,12 +28,11 @@ export type Product = {
 };
 export type Currency = '€' | '$';
 
-export type NotificationType = 'info' | 'warning' | 'delete';
+export type NotificationType = 'info' | 'warning' ;
 
 export interface Notification {
   type: NotificationType;
   text: string;
-  compType: 'modal' | 'snackbar'
 }
 
 export interface UserAuth {

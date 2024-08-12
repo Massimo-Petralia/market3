@@ -12,6 +12,7 @@ const productSlice = createSlice({
   initialState: {
     loadingState: 'idle' as LoadingState,
     product: DefaultProduct,
+    isDeleted: false
   },
   reducers: {
     createProduct: (state, action) => {
@@ -52,13 +53,20 @@ const productSlice = createSlice({
     },
     deleteProductSuccess: (state, action) => {
       console.log('Action: ', action.type);
-      return {...state, loadingState: 'idle'};
+      return {...state, loadingState: 'idle', isDeleted: true};
     },
     deleteProductFailed: (state, action: PayloadAction<string>) => {
       if (state.loadingState === 'loading') {
         return {...state, loadingState: 'idle'};
       }
     },
+    resetIsDeleted : (state, action)=>{
+      console.log('Action: ', action.type)
+      if(state.isDeleted === true)
+      {
+        return {...state, isDeleted: false}
+      }
+    }
   },
 });
 export const {
@@ -70,7 +78,8 @@ export const {
   updateProductFailed,
   deleteProduct,
   deleteProductSuccess,
-  deleteProductFailed
+  deleteProductFailed,
+  resetIsDeleted
 } = productSlice.actions;
 export const productReducer = productSlice.reducer;
 
@@ -84,7 +93,6 @@ class ProductThuks {
         const notification: Notification = {
           type: 'info',
           text: 'Product created !',
-          compType: 'snackbar',
         };
         dispatch(createProductSuccess(product));
         dispatch(setNotification(notification));
@@ -103,7 +111,6 @@ class ProductThuks {
             const notification: Notification = {
               type: 'warning',
               text: data,
-              compType: 'snackbar',
             };
             dispatch(updateProductFailed(notification.text));
             dispatch(setNotification(notification));
@@ -113,7 +120,6 @@ class ProductThuks {
             const notification: Notification = {
               type: 'info',
               text: 'Product updated !',
-              compType: 'snackbar',
             };
             dispatch(updateProductSuccess(product));
             dispatch(setNotification(notification));
@@ -130,7 +136,6 @@ class ProductThuks {
         const notification: Notification = {
           type: 'warning',
           text: data,
-          compType: 'snackbar'
         };
         dispatch(deleteProductFailed(notification.text))
         dispatch(setNotification(notification))
@@ -139,7 +144,6 @@ class ProductThuks {
         const notification: Notification = {
           type: 'info',
           text: 'Product deleted !',
-          compType: 'snackbar'
         };
         dispatch(deleteProductSuccess(null))
         dispatch(removeProduct(id))

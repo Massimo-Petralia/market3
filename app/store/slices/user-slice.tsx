@@ -120,7 +120,6 @@ class UserThunks {
           const notification: Notification = {
             type: 'warning',
             text: data,
-            compType: 'snackbar',
           };
           dispatch(creteUserFailed(notification.text));
           dispatch(setNotification(notification));
@@ -129,7 +128,6 @@ class UserThunks {
           const notification: Notification = {
             type: 'info',
             text: 'Registration was successful, you can signin !',
-            compType: 'snackbar',
           };
           dispatch(createUserSuccess());
           dispatch(setNotification(notification));
@@ -152,7 +150,6 @@ class UserThunks {
             const notification: Notification = {
               type: 'warning',
               text: data,
-              compType: 'snackbar',
             };
             dispatch(creteUserFailed(notification.text));
             dispatch(setNotification(notification));
@@ -162,7 +159,6 @@ class UserThunks {
             const notification: Notification = {
               type: 'info',
               text: 'You are signed in !',
-              compType: 'snackbar',
             };
             dispatch(
               signinUserSuccess({
@@ -187,7 +183,6 @@ class UserThunks {
           const notification: Notification = {
             type: 'info',
             text: `${key} updated !`,
-            compType: 'snackbar',
           };
           dispatch(patchUserPropertySuccess({key, property}));
           dispatch(setNotification(notification));

@@ -12,3 +12,8 @@ export const selectLoadingState = createSelector(
     [selectProduct],
     (product) => product.loadingState 
 )
+
+export const selectIsDeleted = createSelector(
+    [selectProduct],
+    (product)=> product.isDeleted
+)

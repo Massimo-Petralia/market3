@@ -9,11 +9,14 @@ import {ProductsList} from './product-list-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {Product} from '../../../models/models';
 import {productListThunks} from '../../store/slices/product-list-slice';
+import {selectIsDeleted} from '../../store/selectors/product-selectors';
+import {resetIsDeleted} from '../../store/slices/product-slice';
 
 export const ProductsListPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const loadingState = useSelector(selectLoadingState);
   const productList = useSelector(selectProducts);
+  const isDeleted = useSelector(selectIsDeleted);
   const filteredProductsResult = useSelector(selectFilteredProducts);
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setfilteredProducts] = useState<Product[]>([]);
@@ -31,6 +34,11 @@ export const ProductsListPage = () => {
   useEffect(() => {
     setfilteredProducts(Object.values(filteredProductsResult));
   }, [filteredProductsResult]);
+  useEffect(() => {
+    if (isDeleted === true) {
+      dispatch(resetIsDeleted(null));
+    }
+  }, [isDeleted]);
   return (
     <>
       <ProductsList

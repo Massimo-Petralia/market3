@@ -12,22 +12,24 @@ import {useEffect, useState} from 'react';
 import {DefaultProduct} from '../../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {NotificationModal} from '../../../components/notification-modal';
 
 export const FormProduct = ({
   onCreateProduct,
   onUpdateProduct,
-  onDeleteProduct,
   loadingState,
   product,
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
-  onDeleteProduct: (id: number) => void;
   loadingState: LoadingState;
   product: Product;
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const toggleNotification = () => setIsVisible(!isVisible);
 
   useEffect(() => {
     setFormProduct(product);
@@ -166,7 +168,10 @@ export const FormProduct = ({
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Button
-            onPress={() => {}}
+            onPress={() => {
+              toggleNotification();
+              setFormProduct(DefaultProduct);
+            }}
             style={{marginBottom: 5}}
             mode="contained"
             buttonColor={theme.colors.error}
@@ -206,6 +211,11 @@ export const FormProduct = ({
           </Button>
         </View>
       </View>
+      <NotificationModal
+        product={product}
+        toggleNotification={toggleNotification}
+        isVisible={isVisible}
+      />
     </ScrollView>
   );
 };

@@ -118,7 +118,6 @@ class ProductListThunks {
           const notification: Notification = {
             type: 'info',
             text: 'No results !',
-            compType: 'snackbar',
           };
           dispatch(getFilteredProductsFailed(notification.text));
           dispatch(setNotification(notification)),
