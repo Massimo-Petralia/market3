@@ -20,10 +20,10 @@ export const ImagesPreview = ({
   const theme = useTheme();
   const [images, setImages] = useState<string[]>([]);
   const [counter, setCounter] = useState<number>(0);
-  const assignImages = (images: string[]) => {
-    //forse non serve
-    setImages(images);
-  };
+  // const assignImages = (images: string[]) => {
+  //   //forse non serve
+  //   setImages(images);
+  // };
   const setImageField = (images: string[]) => {
     if (handleImagesChanges) {
       handleImagesChanges(images);
@@ -61,8 +61,6 @@ export const ImagesPreview = ({
         onPageSelected={e => setCounter(e.nativeEvent.position)}>
         {images.map((image, index) => (
           <Card key={index}>
-            {/* <Card.Title title={`Preview .${index + 1}`} /> */}
-            {/* <Divider horizontalInset style={{marginBottom: 15}} /> */}
             <Card.Content>
               <Image
                 style={{height: 140}}
@@ -88,7 +86,7 @@ export const ImagesPreview = ({
           );
         })}
       </View>
-      {!isProductDetail ? (
+      {!isProductDetail ? (//serve x mostrare il bottone
         <Button
           style={{marginVertical: 10}}
           mode="contained"

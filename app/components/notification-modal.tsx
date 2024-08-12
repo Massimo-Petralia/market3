@@ -1,7 +1,5 @@
-import {View} from 'react-native';
 import {Text, useTheme, Portal, Dialog, Button} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {useState} from 'react';
 import {AppDispatch} from '../store/store';
 import {Product} from '../../models/models';
 import {productThunks} from '../store/slices/product-slice';
@@ -39,7 +37,7 @@ export const NotificationModal = ({
                   dispatch(
                     productThunks.deleteProductThunk(accessToken, product.id),
                   );
-                  toggleNotification()
+                 toggleNotification()
                 }
               }}>
               Yes

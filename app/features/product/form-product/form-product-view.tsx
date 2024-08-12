@@ -19,11 +19,15 @@ export const FormProduct = ({
   onUpdateProduct,
   loadingState,
   product,
+  isDeleted,
+  onResetIsDeleted,
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
   loadingState: LoadingState;
   product: Product;
+  isDeleted: boolean;
+  onResetIsDeleted: () => void;
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
@@ -34,6 +38,13 @@ export const FormProduct = ({
   useEffect(() => {
     setFormProduct(product);
   }, [product]);
+
+  useEffect(() => {
+    setFormProduct(DefaultProduct);
+    if (isDeleted === true) {
+      onResetIsDeleted();
+    }
+  }, [isDeleted]);
 
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
@@ -168,10 +179,7 @@ export const FormProduct = ({
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Button
-            onPress={() => {
-              toggleNotification();
-              setFormProduct(DefaultProduct);
-            }}
+            onPress={() => toggleNotification()}
             style={{marginBottom: 5}}
             mode="contained"
             buttonColor={theme.colors.error}

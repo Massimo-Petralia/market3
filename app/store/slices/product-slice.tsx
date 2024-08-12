@@ -4,8 +4,6 @@ import {DefaultProduct} from '../../../models/default-values';
 import {productService} from '../../services/product-service';
 import {setNotification, toggleNotification} from './alerts-slice';
 import { removeProduct } from './product-list-slice';
-import {selectProducts} from '../selectors/product-list-selectors';
-import {useSelector} from 'react-redux';
 
 const productSlice = createSlice({
   name: 'product',
@@ -60,13 +58,12 @@ const productSlice = createSlice({
         return {...state, loadingState: 'idle'};
       }
     },
-    resetIsDeleted : (state, action)=>{
-      console.log('Action: ', action.type)
-      if(state.isDeleted === true)
-      {
-        return {...state, isDeleted: false}
-      }
+   resetIsDeleted: (state, action) => {
+    console.log('Action: ', action.type)
+    if(state.isDeleted === true){
+      return {...state, isDeleted: false}
     }
+   }
   },
 });
 export const {
