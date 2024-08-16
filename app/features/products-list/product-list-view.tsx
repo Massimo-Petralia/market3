@@ -6,26 +6,27 @@ import {
   ScrollView,
   Pressable,
 } from 'react-native';
-import {Text, Card, Divider, ActivityIndicator} from 'react-native-paper';
+import {Card, Divider, ActivityIndicator} from 'react-native-paper';
 import {LoadingState, Product} from '../../../models/models';
 import {useEffect, useRef} from 'react';
 import {FilteredSearch} from '../../components/filtered-search';
 import {useNavigation} from '@react-navigation/native';
-import Routes from '../../navigation/routes';
-import {HomeStackNavigationProp} from '../../navigation/navigation-types';
+import {RootStackNavigationProp} from '../../navigation/navigation-types';
 
 export const ProductsList = ({
   products,
   onFilteredSearch,
   filteredProducts,
   loadingState,
+  userId,
 }: {
   products: Product[];
   onFilteredSearch: (name: string) => void;
   filteredProducts: Product[];
   loadingState: LoadingState;
+  userId: number | undefined;
 }) => {
-  const navigation = useNavigation<HomeStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const flatListRef = useRef<FlatList<Product>>(null);
   const {width} = Dimensions.get('window');
 
@@ -37,6 +38,7 @@ export const ProductsList = ({
       </View>
     );
   }
+
   return (
     <>
       <FilteredSearch
@@ -55,22 +57,38 @@ export const ProductsList = ({
               horizontal
               renderItem={({item}) => (
                 <Pressable
-                onPress={() => {
-                  if (item.id) {
-                    navigation.navigate('Product detail', {productId: item.id, isProductDetail: true});
-                  }
-                }}>
-                <Card style={{width}}>
-                  <Card.Title title={item.name} />
-                  <Divider horizontalInset style={{marginBottom: 10}} />
-                  <Card.Content>
-                    <Image
-                      style={{height: 200}}
-                      resizeMode="contain"
-                      source={{uri: item.images[0]}}
-                    />
-                  </Card.Content>
-                </Card>
+                  onPress={() => {
+                    if (item.userId === userId) {
+                      navigation.replace('MainTabs', {
+                        screen: 'Sell',
+                        params: {
+                          productId: item.id,
+                          viewMode: 'edit',
+                        },
+                      });
+                    } else
+                      navigation.replace('MainTabs', {
+                        screen: 'Home',
+                        params: {
+                          screen: 'Product detail',
+                          params: {
+                            productId: item.id,
+                            viewMode: 'presentation',
+                          },
+                        },
+                      });
+                  }}>
+                  <Card style={{width}}>
+                    <Card.Title title={item.name} />
+                    <Divider horizontalInset style={{marginBottom: 10}} />
+                    <Card.Content>
+                      <Image
+                        style={{height: 200}}
+                        resizeMode="contain"
+                        source={{uri: item.images[0]}}
+                      />
+                    </Card.Content>
+                  </Card>
                 </Pressable>
               )}
               keyExtractor={(item, index) => index.toString()}
@@ -87,9 +105,25 @@ export const ProductsList = ({
           renderItem={({item}) => (
             <Pressable
               onPress={() => {
-                if (item.id) {
-                  navigation.navigate('Product detail', {productId: item.id, isProductDetail: true});
-                }
+                if (item.userId === userId) {
+                  navigation.replace('MainTabs', {
+                    screen: 'Sell',
+                    params: {
+                      productId: item.id,
+                      viewMode: 'edit',
+                    },
+                  });
+                } else
+                  navigation.navigate('MainTabs', {
+                    screen: 'Home',
+                    params: {
+                      screen: 'Product detail',
+                      params: {
+                        productId: item.id,
+                        viewMode: 'presentation',
+                      },
+                    },
+                  });
               }}>
               <Card style={{width}}>
                 <Card.Title title={item.name} />

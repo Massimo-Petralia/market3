@@ -7,15 +7,18 @@ import {Button, Card, Divider, Text, useTheme} from 'react-native-paper';
 import {DotIndicator} from './dot-indicator';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {IsProductDetail} from '../navigation/navigation-types';
+import { ViewMode } from '../../models/models';
 
 export const ImagesPreview = ({
   handleImagesChanges,
   imagesNode,
   isProductDetail,
+  viewMode
 }: {
   handleImagesChanges?: (images: string[]) => void;
   imagesNode: string[];
   isProductDetail?: boolean;
+  viewMode: ViewMode
 }) => {
   const theme = useTheme();
   const [images, setImages] = useState<string[]>([]);
@@ -86,7 +89,7 @@ export const ImagesPreview = ({
           );
         })}
       </View>
-      {!isProductDetail ? (//serve x mostrare il bottone
+      {viewMode !== 'presentation' ? (//serve x mostrare il bottone
         <Button
           style={{marginVertical: 10}}
           mode="contained"

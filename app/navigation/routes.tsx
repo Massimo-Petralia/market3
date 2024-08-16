@@ -6,8 +6,8 @@ export const Routes = {
   MainTabs: {
     index: 'MainTabs',
     HomeStack: {
-      index: 'HomeStack',
-      Home: 'Home',
+      index: 'Home',
+      Home: 'home',
       ProductDetail: 'Product detail'
     },
     UserStack: {

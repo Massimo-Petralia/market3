@@ -6,11 +6,11 @@ import { selectProducts } from "../../../store/selectors/product-list-selectors"
 
 export const ProductDetailPage = () => {
     const route = useRoute<ProductRouteProp>()
-    const {productId, isProductDetail} = route.params
+    const {productId, viewMode} = route.params
     const products = useSelector(selectProducts)
     return (
         <>
-        <ProductDetail product={products[productId]}  isProductDetail={isProductDetail} />
+        <ProductDetail product={products[productId!]}  viewMode={viewMode} />
         </>
     )
 }

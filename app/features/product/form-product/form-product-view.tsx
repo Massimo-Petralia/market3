@@ -13,6 +13,10 @@ import {DefaultProduct} from '../../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {NotificationModal} from '../../../components/notification-modal';
+import {useRoute} from '@react-navigation/native';
+import {ProductRouteProp} from '../../../navigation/navigation-types';
+import {useSelector} from 'react-redux';
+import {selectProducts} from '../../../store/selectors/product-list-selectors';
 
 export const FormProduct = ({
   onCreateProduct,
@@ -30,6 +34,10 @@ export const FormProduct = ({
   onResetIsDeleted: () => void;
 }) => {
   const theme = useTheme();
+  const route = useRoute<ProductRouteProp>();
+  const {productId, viewMode} = route.params;
+  const products = useSelector(selectProducts);
+
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -45,6 +53,12 @@ export const FormProduct = ({
       onResetIsDeleted();
     }
   }, [isDeleted]);
+
+  useEffect(() => {
+    if (productId) {
+      setFormProduct(products[productId]);
+    }
+  }, [productId]);
 
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
@@ -174,6 +188,7 @@ export const FormProduct = ({
           </Menu>
         </View>
         <ImagesPreview
+          viewMode={viewMode}
           imagesNode={formProduct.images}
           handleImagesChanges={handleImagesChanges}
         />
