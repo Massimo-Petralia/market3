@@ -43,3 +43,5 @@ export interface UserAuth {
 export type LoadingState = 'idle' | 'loading';
 
 export type ProductList = {[id: number]: Product}
+
+export type ViewMode = 'presentation' | 'edit'

@@ -9,12 +9,14 @@ import {ProductsList} from './product-list-view';
 import {useDispatch, useSelector} from 'react-redux';
 import {Product} from '../../../models/models';
 import {productListThunks} from '../../store/slices/product-list-slice';
+import { selectUserId } from '../../store/selectors/user-selectors';
 
 export const ProductsListPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const loadingState = useSelector(selectLoadingState);
   const productList = useSelector(selectProducts);
   const filteredProductsResult = useSelector(selectFilteredProducts);
+  const userId = useSelector(selectUserId)
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setfilteredProducts] = useState<Product[]>([]);
 
@@ -39,6 +41,7 @@ export const ProductsListPage = () => {
         onFilteredSearch={onFilteredSearch}
         filteredProducts={filteredProducts}
         loadingState={loadingState}
+        userId={userId}
       />
     </>
   );
