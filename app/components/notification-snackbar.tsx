@@ -16,7 +16,7 @@ interface CustomModal {
   color: string;
 }
 
-export const Notification = () => {
+export const NotificationSnackbar = () => {
   const theme = useTheme();
   const isVisible = useSelector(selectIsVisible);
   const notification = useSelector(selectNotification);
@@ -39,15 +39,10 @@ export const Notification = () => {
         color: theme.colors.tertiary,
       };
     }
-    if (type === 'delete') {
-      stylizedContent = {
-        iconName: 'warning',
-        color: theme.colors.tertiary,
-      };
-    }
+   
     return stylizedContent;
   };
-  if (notification.compType === 'snackbar') {
+
     return (
       <Snackbar
       wrapperStyle={{marginBottom:80}}
@@ -65,17 +60,7 @@ export const Notification = () => {
         </View>
       </Snackbar>
     );
-  }
+  
 
-  if (notification.compType === 'modal') {
-    return (
-      <Portal>
-        <Modal
-          visible={isVisible}
-          onDismiss={() => dispatch(toggleNotification())}>
-          <Text>Hello world !</Text>
-        </Modal>
-      </Portal>
-    );
-  }
+
 };

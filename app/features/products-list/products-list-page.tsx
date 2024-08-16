@@ -31,6 +31,7 @@ export const ProductsListPage = () => {
   useEffect(() => {
     setfilteredProducts(Object.values(filteredProductsResult));
   }, [filteredProductsResult]);
+
   return (
     <>
       <ProductsList

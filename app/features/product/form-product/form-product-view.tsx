@@ -1,4 +1,4 @@
-import {View, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable, StyleSheet, ScrollView} from 'react-native';
 import {
   Text,
   ActivityIndicator,
@@ -11,21 +11,40 @@ import {Currency, LoadingState, Product} from '../../../../models/models';
 import {useEffect, useState} from 'react';
 import {DefaultProduct} from '../../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {NotificationModal} from '../../../components/notification-modal';
 
 export const FormProduct = ({
   onCreateProduct,
   onUpdateProduct,
   loadingState,
   product,
+  isDeleted,
+  onResetIsDeleted,
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
   loadingState: LoadingState;
   product: Product;
+  isDeleted: boolean;
+  onResetIsDeleted: () => void;
 }) => {
   const theme = useTheme();
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const toggleNotification = () => setIsVisible(!isVisible);
+
+  useEffect(() => {
+    setFormProduct(product);
+  }, [product]);
+
+  useEffect(() => {
+    setFormProduct(DefaultProduct);
+    if (isDeleted === true) {
+      onResetIsDeleted();
+    }
+  }, [isDeleted]);
 
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
@@ -54,8 +73,6 @@ export const FormProduct = ({
     updateFormProduct('images', images);
   };
 
-  useEffect(() => {}, []);//poi settare formProduct
-
   if (loadingState === 'loading') {
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
@@ -64,34 +81,36 @@ export const FormProduct = ({
     );
   }
   return (
-    <View>
+    <ScrollView>
       <View id="form-product" style={{marginHorizontal: 20}}>
-        <Button
-          style={{marginBottom: 5}}
-          mode="contained"
-          onPress={() => {
-            if (!formProduct.id) {
-              onCreateProduct(formProduct);
-              setFormProduct(DefaultProduct);
-            }
-          }}>
-          Save
-        </Button>
+        {formProduct.id ? (
+          <View style={style.infoForm}>
+            <Text variant="bodyLarge" style={{color: 'dodgerblue'}}>
+              For add new product first{' '}
+            </Text>
+            <Button
+              mode="contained"
+              onPress={() => setFormProduct(DefaultProduct)}>
+              reset form
+            </Button>
+          </View>
+        ) : null}
+
         <TextInput
-          style={{marginVertical: 10}}
+          style={{marginVertical: 5}}
           label="Name"
           value={formProduct.name}
           onChangeText={name => handleNameChanges(name)}
         />
         <TextInput
-          style={{marginVertical: 10}}
+          style={{marginVertical: 5}}
           label="Description"
           value={formProduct.description}
           onChangeText={description => handleDescriptionChanges(description)}
         />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TextInput
-            style={{marginVertical: 10, minWidth: 150}}
+            style={{marginVertical: 5, minWidth: 150}}
             label="Price"
             value={formProduct.price}
             onChangeText={price => handlePriceChanges(price)}
@@ -109,13 +128,19 @@ export const FormProduct = ({
                 ]}
                 onPress={() => openMenu()}>
                 <Text
-                  style={{color: theme.colors.onPrimary}}
-                  variant="bodyLarge">
-                  {formProduct.currency + ' Currency '}{' '}
+                  style={{color: theme.colors.onPrimary, fontWeight: 'bold'}}
+                  variant="headlineSmall">
+                  {formProduct.currency}
+                </Text>
+                <Text
+                  variant="bodyLarge"
+                  style={{color: theme.colors.onPrimary}}>
+                  {' '}
+                  Currency{'  '}
                 </Text>
                 {!visible ? (
                   <>
-                    <FontAwesome
+                    <FontAwesome5
                       color={theme.colors.onPrimary}
                       size={18}
                       name="caret-right"
@@ -123,7 +148,7 @@ export const FormProduct = ({
                   </>
                 ) : (
                   <>
-                    <FontAwesome
+                    <FontAwesome5
                       color={theme.colors.onPrimary}
                       size={18}
                       name="caret-down"
@@ -152,8 +177,54 @@ export const FormProduct = ({
           imagesNode={formProduct.images}
           handleImagesChanges={handleImagesChanges}
         />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Button
+            onPress={() => toggleNotification()}
+            style={{marginBottom: 5}}
+            mode="contained"
+            buttonColor={theme.colors.error}
+            textColor={theme.colors.onError}
+            icon={() => (
+              <>
+                <FontAwesome5
+                  name="trash"
+                  size={20}
+                  color={theme.colors.onError}
+                />
+              </>
+            )}>
+            Delete
+          </Button>
+          <Button
+            style={{marginBottom: 5, width: 106.7}}
+            mode="contained"
+            icon={() => (
+              <>
+                <FontAwesome5
+                  name="save"
+                  size={20}
+                  color={theme.colors.onPrimary}
+                />
+              </>
+            )}
+            onPress={() => {
+              if (!formProduct.id) {
+                onCreateProduct(formProduct);
+              }
+              if (formProduct.id) {
+                onUpdateProduct(formProduct);
+              }
+            }}>
+            Save
+          </Button>
+        </View>
       </View>
-    </View>
+      <NotificationModal
+        product={product}
+        toggleNotification={toggleNotification}
+        isVisible={isVisible}
+      />
+    </ScrollView>
   );
 };
 
@@ -166,5 +237,11 @@ const style = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     width: 125,
+  },
+  infoForm: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
 });

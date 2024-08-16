@@ -6,8 +6,7 @@ import {PaperProviderWrapper} from './app/components/paper-provider-wrapper';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {adaptNavigationTheme} from 'react-native-paper';
 import {selectIsDarkTheme} from './app/store/selectors/theme-selectors';
-import {Notification} from './app/components/notification';
-import {MainTabNavigator} from './app/navigation/main-tab-navigator';
+import {NotificationSnackbar} from './app/components/notification-snackbar';
 import {MainAppBar} from './app/components/main-app-bar';
 import { RootNavigator } from './app/navigation/root-navigator';
 const {LightTheme} = adaptNavigationTheme({reactNavigationLight: DefaultTheme});
@@ -29,7 +28,7 @@ function AppContent(): React.JSX.Element {
       <NavigationContainer theme={!isDarkTheme ? LightTheme : DarkTheme}>
         <RootNavigator/>
       </NavigationContainer>
-      <Notification /> 
+      <NotificationSnackbar /> 
     </PaperProviderWrapper>
   );
 }

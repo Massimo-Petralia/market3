@@ -77,6 +77,12 @@ const productListSlice = createSlice({
         return {...state, loadingState: 'idle'};
       }
     },
+    removeProduct: (state, action: PayloadAction<number>) => {
+      console.log('Action: ', action.type)
+      const newProductList: ProductList = {...state.productList};
+      delete newProductList[action.payload];
+      return {...state, productList: newProductList};
+    },
   },
 });
 
@@ -87,6 +93,7 @@ export const {
   getFilteredProducts,
   getFilteredProductsSuccess,
   getFilteredProductsFailed,
+  removeProduct
 } = productListSlice.actions;
 export const productListReducer = productListSlice.reducer;
 
@@ -111,11 +118,10 @@ class ProductListThunks {
           const notification: Notification = {
             type: 'info',
             text: 'No results !',
-            compType: 'snackbar',
           };
           dispatch(getFilteredProductsFailed(notification.text));
           dispatch(setNotification(notification)),
-          dispatch(toggleNotification());
+            dispatch(toggleNotification());
         } else {
           dispatch(getFilteredProductsSuccess({products: data}));
         }
