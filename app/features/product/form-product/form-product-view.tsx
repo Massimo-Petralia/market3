@@ -35,7 +35,7 @@ export const FormProduct = ({
 }) => {
   const theme = useTheme();
   const route = useRoute<ProductRouteProp>();
-  const {productId, viewMode} = route.params;
+  const {productId, viewMode} = route.params || {productId: null, viewMode: 'edit'};
   const products = useSelector(selectProducts);
 
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);

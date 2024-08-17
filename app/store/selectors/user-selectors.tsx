@@ -32,3 +32,7 @@ export const selectUserId = createSelector(
     [selectUser],
     ({user})=> user.id
 )
+export const selectCart = createSelector(
+    [selectUser],
+    ({user})=> user.cart
+)

@@ -5,7 +5,7 @@ export interface User {
   avatar: {type: string; uri: string};
   email: string;
   password: string;
-  cart: Product[];
+  cart: ProductList;
   address: Address;
 }
 
