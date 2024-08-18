@@ -39,28 +39,26 @@ export const NotificationSnackbar = () => {
         color: theme.colors.tertiary,
       };
     }
-   
+
     return stylizedContent;
   };
 
-    return (
-      <Snackbar
-      wrapperStyle={{marginBottom:80}}
-        visible={isVisible}
-        onDismiss={() => dispatch(toggleNotification())}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <FontAwesome
-            name={customizeNotification(notification.type).iconName}
-            color={customizeNotification(notification.type).color}
-          />
-          <Text style={{color: customizeNotification(notification.type).color}}>
-            {' '}
-            {notification.text}
-          </Text>
-        </View>
-      </Snackbar>
-    );
-  
-
-
+  return (
+    <Snackbar
+      duration={5000}
+      wrapperStyle={{marginBottom: 80}}
+      visible={isVisible}
+      onDismiss={() => dispatch(toggleNotification())}>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <FontAwesome
+          name={customizeNotification(notification.type).iconName}
+          color={customizeNotification(notification.type).color}
+        />
+        <Text style={{color: customizeNotification(notification.type).color}}>
+          {' '}
+          {notification.text}
+        </Text>
+      </View>
+    </Snackbar>
+  );
 };
