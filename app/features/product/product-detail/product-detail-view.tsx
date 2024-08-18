@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import {Text, Card, Button} from 'react-native-paper';
+import {Text, Card, Button, useTheme} from 'react-native-paper';
 import {Product, ViewMode} from '../../../../models/models';
 import {ImagesPreview} from '../../../components/images-preview';
 
@@ -12,8 +12,9 @@ export const ProductDetail = ({
   viewMode: ViewMode;
   onAddToCart: () => void;
 }) => {
+  const theme = useTheme()
   return (
-    <View>
+    <View style={{marginHorizontal: 20, marginVertical: 10}} >
       <Card>
         <Card.Title titleVariant="headlineMedium" title={product.name || ''} />
         <Card.Content>
@@ -21,14 +22,16 @@ export const ProductDetail = ({
           <View style={{marginVertical: 10}}>
             <ImagesPreview viewMode={viewMode} imagesNode={product.images} />
           </View>
+          <Text variant='displaySmall' style={{alignSelf: 'center'}}>{`${product.price} ${product.currency}`}</Text>
         </Card.Content>
       </Card>
       <Button
+      style={{marginVertical: 10}}
         mode="contained"
         onPress={() => {
           onAddToCart();
         }}>
-        Add to cart
+      <Text style={{color: theme.colors.onPrimary, fontWeight: 'bold', fontSize:18}}>Add to cart</Text>  
       </Button>
     </View>
   );
