@@ -1,55 +1,95 @@
 import {View, ScrollView, Pressable, Image} from 'react-native';
-import {Text, Card, Divider} from 'react-native-paper';
-import {Product} from '../../../models/models';
+import {Text, Card, Divider, IconButton, useTheme, ActivityIndicator} from 'react-native-paper';
+import {LoadingState, Product} from '../../../models/models';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../navigation/navigation-types';
 
-export const Cart = ({cart}: {cart: Product[]}) => {
+export const Cart = ({
+  cart,
+  onRemoveItem,
+  loadingState
+}: {
+  cart: Product[];
+  onRemoveItem: (id: number) => void;
+  loadingState: LoadingState
+}) => {
+  const theme = useTheme();
   const navigation = useNavigation<RootStackNavigationProp>();
+  if (loadingState === 'loading') {
+    return (
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
   return (
     <ScrollView style={{marginHorizontal: 20}}>
       {cart.length !== 0 ? (
         cart.map((product, index) => (
-          <Pressable
+          <Card
             key={index}
             style={{marginVertical: 10}}
-            onPress={() =>
-              navigation.push('MainTabs', {
-                screen: 'Home',
-                params: {
-                  screen: 'Product detail',
-                  params: {
-                    productId: product.id,
-                    viewMode: 'presentation',
-                  },
-                },
-              })
-            }>
-            <Card contentStyle={{flexDirection: 'row', alignItems: 'center'}}>
-              <Card.Content>
-                <Image
-                  style={{height: 140, width: 140}}
-                  source={{uri: product.images[0]}}
-                  resizeMode="contain"
-                />
-              </Card.Content>
+            contentStyle={{flexDirection: 'row', alignItems: 'center'}}>
+            <Card.Content>
+              <Image
+                style={{height: 140, width: 140}}
+                source={{uri: product.images[0]}}
+                resizeMode="contain"
+              />
+            </Card.Content>
+            <View
+              style={{
+                backgroundColor: 'grey',
+                height: 120,
+                width: 2,
+              }}></View>
+            <Card.Content style={{flex: 1}}>
+              <Text
+                variant="titleMedium"
+                style={{flexWrap: 'wrap', maxWidth: '100%'}}>
+                {product.name}
+              </Text>
+              <Divider />
+              <Text variant="bodyMedium">{`${product.price}${product.currency}`}</Text>
               <View
                 style={{
-                  backgroundColor: 'grey',
-                  height: 120,
-                  width: 2,
-                }}></View>
-              <Card.Content style={{flex: 1}}>
-                <Text
-                  variant="titleMedium"
-                  style={{flexWrap: 'wrap', maxWidth: '100%'}}>
-                  {product.name}
-                </Text>
-                <Divider />
-                <Text variant="bodyMedium">{`${product.price}${product.currency}`}</Text>
-              </Card.Content>
-            </Card>
-          </Pressable>
+                  flexDirection: 'row',
+                  marginTop: 10,
+                  justifyContent: 'space-between',
+                }}>
+                <IconButton
+                  mode="outlined"
+                  containerColor={theme.colors.onSecondary}
+                  iconColor={theme.colors.secondary}
+                  icon="eye"
+                  onPress={() =>
+                    navigation.push('MainTabs', {
+                      screen: 'Home',
+                      params: {
+                        screen: 'Product detail',
+                        params: {
+                          productId: product.id,
+                          viewMode: 'presentation',
+                        },
+                      },
+                    })
+                  }
+                />
+
+                <IconButton
+                  mode="outlined"
+                  containerColor={theme.colors.onSecondary}
+                  iconColor={theme.colors.secondary}
+                  icon="trash-can"
+                  onPress={() => {
+                    if (product.id) {
+                      onRemoveItem(product.id);
+                    }
+                  }}
+                />
+              </View>
+            </Card.Content>
+          </Card>
         ))
       ) : (
         <Text style={{alignSelf: 'center'}}>Your cart is empty !</Text>
