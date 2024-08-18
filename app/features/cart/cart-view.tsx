@@ -41,13 +41,13 @@ export const Cart = ({
         <Card.Content>
           <Text variant="bodyLarge">Summary</Text>
           <Text>{`Total items: ${cart.length}`}</Text>
-          <Text>{`Subtotal price: ${cart
+          {/* <Text>{`Subtotal price: ${cart
             .map(elemet => Number(elemet.price))
-            .reduce((acc, price) => {
+            .reduce((acc,price, ) => {
               const subtotal = Number(acc) + Number(price);
               return subtotal;
-            })}${cart[0].currency}`}</Text>
-          <Text>Shipping price: 5{cart[0].currency}</Text>
+            },[])}${cart[0].currency}`}</Text> */}
+          {/* <Text>Shipping price: 5{cart[0].currency}</Text> */}
         </Card.Content>
         <Card.Actions>
           <Button mode='contained'>Buy</Button>
@@ -100,6 +100,7 @@ export const Cart = ({
                           params: {
                             productId: product.id,
                             viewMode: 'presentation',
+                            navigationFromCart: true
                           },
                         },
                       })

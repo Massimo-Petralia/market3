@@ -30,6 +30,7 @@ export type HomeStackParamList = {
   [Routes.MainTabs.HomeStack.ProductDetail]: {
     productId: number | undefined;
     viewMode: ViewMode;
+    navigationFromCart?: boolean
   };
 };
 

@@ -14,7 +14,7 @@ import {
 export const ProductDetailPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const route = useRoute<ProductRouteProp>();
-  const {productId, viewMode} = route.params;
+  const {productId, viewMode, navigationFromCart} = route.params;
   const products = useSelector(selectProducts);
   const userId = useSelector(selectUserId);
   const cart = useSelector(selectCart);
@@ -27,7 +27,7 @@ export const ProductDetailPage = () => {
   };
   return (
     <>
-      <ProductDetail onAddToCart={onAddToCart} product={products[productId!]} viewMode={viewMode} />
+      <ProductDetail onAddToCart={onAddToCart} product={products[productId!]} viewMode={viewMode} navigationFromCart={navigationFromCart} />
     </>
   );
 };
