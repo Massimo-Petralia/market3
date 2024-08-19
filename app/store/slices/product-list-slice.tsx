@@ -16,6 +16,7 @@ const productListSlice = createSlice({
     loadingState: 'idle' as LoadingState,
     productList: defaultProductList,
     filteredProducts: defaultProductList,
+    myProducts: defaultProductList
   },
   reducers: {
     getProductList: (state, action) => {
@@ -83,6 +84,28 @@ const productListSlice = createSlice({
       delete newProductList[action.payload];
       return {...state, productList: newProductList};
     },
+    getMyProducts : (state, action)=>{
+      console.log('Action: ', action.type)
+      if(state.loadingState === 'idle'){
+        return {...state, loadingState: 'loading'}
+      }
+    },
+    getMyProductsSuccess : (state, action: PayloadAction<{products: Product[]}>)=>{
+      const myProducts: {[id: number]: Product} =
+      action.payload.products.reduce(
+        (collection: {[id: number]: Product}, product) => {
+          collection[product.id!] = product;
+          return collection;
+        },
+        {},
+      );
+      return {...state, myProducts:myProducts, loadingState: 'idle'}
+    },
+    getMyProdutsFailed : (state, action: PayloadAction<string>)=>{
+      if(state.loadingState === 'loading'){
+        return {...state, loadingState: 'idle'}
+      }
+    }
   },
 });
 
@@ -93,7 +116,10 @@ export const {
   getFilteredProducts,
   getFilteredProductsSuccess,
   getFilteredProductsFailed,
-  removeProduct
+  removeProduct,
+  getMyProducts,
+  getMyProductsSuccess,
+  getMyProdutsFailed
 } = productListSlice.actions;
 export const productListReducer = productListSlice.reducer;
 
@@ -130,6 +156,13 @@ class ProductListThunks {
         dispatch(getFilteredProductsFailed(error.message)),
       );
   };
+  getMyProductsThunk = (userId: number)=> async (dispatch: Dispatch)=>{
+    dispatch(getMyProducts(null));
+    productService.getMyProduct(userId).then(async response =>{
+      const data : Product[] = await response.json()
+      dispatch(getMyProductsSuccess({products: data}))
+    }).catch((error: Error)=> dispatch(getMyProdutsFailed(error.message)))
+  }
 }
 
 export const productListThunks = new ProductListThunks();

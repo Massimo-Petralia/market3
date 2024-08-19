@@ -55,6 +55,15 @@ class ProductService {
       },
     });
   };
+  getMyProduct = (userId: number) =>{
+    return fetch(`${productsURL}?userId=${userId}&_page=1&_limit=10`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+  }
 }
 
 export const productService = new ProductService();
