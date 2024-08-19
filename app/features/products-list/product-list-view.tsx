@@ -43,74 +43,76 @@ export const ProductsList = ({
   }
 
   return (
-    <>
+    <View style={{marginTop: 5, marginHorizontal:5}}>
       <FilteredSearch
         loadingState={loadingState}
         onFilteredSearch={onFilteredSearch}
       />
       <FlatList
-      data={combinedData}
-      renderItem={({ item }) => {
-        if (item.type === 'verticalList' && item.data.length !== 0) {
-          return (
-            <FlatList
-              style={{ marginBottom: 5 }}
-              data={item.data}
-              pagingEnabled
-              snapToInterval={width}
-              decelerationRate={'fast'}
-              horizontal={false}
-              renderItem={({ item }) => (
-                <Pressable
-                  onPress={() => {
-                    if (item.userId === userId) {
-                      navigation.replace('MainTabs', {
-                        screen: 'Sell',
-                        params: {
-                          productId: item.id,
-                          viewMode: 'edit',
-                        },
-                      });
-                    } else {
-                      navigation.replace('MainTabs', {
-                        screen: 'Home',
-                        params: {
-                          screen: 'Product detail',
+         style={{marginTop: 10}}
+        data={combinedData}
+        renderItem={({item}) => {
+          if (item.type === 'verticalList' && item.data.length !== 0) {
+            return (
+              <FlatList
+                style={{marginBottom: 10}}
+                data={item.data}
+                pagingEnabled
+                snapToInterval={width}
+                decelerationRate={'fast'}
+                horizontal={false}
+                renderItem={({item}) => (
+                  <Pressable
+                    style={{paddingVertical: 5}}
+                    onPress={() => {
+                      if (item.userId === userId) {
+                        navigation.replace('MainTabs', {
+                          screen: 'Sell',
                           params: {
                             productId: item.id,
-                            viewMode: 'presentation',
+                            viewMode: 'edit',
                           },
-                        },
-                      });
-                    }
-                  }}
-                >
-                  <Card style={{ width }}>
-                    <Card.Title title={item.name} />
-                    <Divider horizontalInset style={{ marginBottom: 10 }} />
-                    <Card.Content>
-                      <Image
-                        style={{ height: 200 }}
-                        resizeMode="contain"
-                        source={{ uri: item.images[0] }}
-                      />
-                    </Card.Content>
-                  </Card>
-                </Pressable>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          );
-        } 
+                        });
+                      } else {
+                        navigation.replace('MainTabs', {
+                          screen: 'Home',
+                          params: {
+                            screen: 'Product detail',
+                            params: {
+                              productId: item.id,
+                              viewMode: 'presentation',
+                            },
+                          },
+                        });
+                      }
+                    }}>
+                    <Card style={{width}}>
+                      <Card.Title title={item.name} />
+                      <Divider horizontalInset style={{marginBottom: 10}} />
+                      <Card.Content>
+                        <Image
+                          style={{height: 200}}
+                          resizeMode="contain"
+                          source={{uri: item.images[0]}}
+                        />
+                      </Card.Content>
+                    </Card>
+                  </Pressable>
+                )}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            )
+          }
           return (
             <FlatList
+            style={{marginBottom:50}}
               ref={flatListRef}
               data={item.data}
               pagingEnabled
               snapToInterval={width}
               decelerationRate={'fast'}
               horizontal
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <Pressable
                   onPress={() => {
                     if (item.userId === userId) {
@@ -133,61 +135,6 @@ export const ProductsList = ({
                         },
                       });
                     }
-                  }}
-                >
-                  <Card style={{ width }}>
-                    <Card.Title title={item.name} />
-                    <Divider horizontalInset style={{ marginBottom: 10 }} />
-                    <Card.Content>
-                      <Image
-                        style={{ height: 200 }}
-                        resizeMode="contain"
-                        source={{ uri: item.images[0] }}
-                      />
-                    </Card.Content>
-                  </Card>
-                </Pressable>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          );
-        
-       
-      }}
-      keyExtractor={(item, index) => index.toString()}
-    />
-      {/* <ScrollView>
-        {filteredProducts.length !== 0 ? (
-          <>
-            <FlatList
-              style={{marginBottom: 5}}
-              data={filteredProducts}
-              pagingEnabled
-              snapToInterval={width}
-              decelerationRate={'fast'}
-              horizontal
-              renderItem={({item}) => (
-                <Pressable
-                  onPress={() => {
-                    if (item.userId === userId) {
-                      navigation.replace('MainTabs', {
-                        screen: 'Sell',
-                        params: {
-                          productId: item.id,
-                          viewMode: 'edit',
-                        },
-                      });
-                    } else
-                      navigation.replace('MainTabs', {
-                        screen: 'Home',
-                        params: {
-                          screen: 'Product detail',
-                          params: {
-                            productId: item.id,
-                            viewMode: 'presentation',
-                          },
-                        },
-                      });
                   }}>
                   <Card style={{width}}>
                     <Card.Title title={item.name} />
@@ -204,54 +151,10 @@ export const ProductsList = ({
               )}
               keyExtractor={(item, index) => index.toString()}
             />
-          </>
-        ) : null}
-        <FlatList
-          ref={flatListRef}
-          data={products}
-          pagingEnabled
-          snapToInterval={width}
-          decelerationRate={'fast'}
-          horizontal
-          renderItem={({item}) => (
-            <Pressable
-              onPress={() => {
-                if (item.userId === userId) {
-                  navigation.replace('MainTabs', {
-                    screen: 'Sell',
-                    params: {
-                      productId: item.id,
-                      viewMode: 'edit',
-                    },
-                  });
-                } else
-                  navigation.navigate('MainTabs', {
-                    screen: 'Home',
-                    params: {
-                      screen: 'Product detail',
-                      params: {
-                        productId: item.id,
-                        viewMode: 'presentation',
-                      },
-                    },
-                  });
-              }}>
-              <Card style={{width}}>
-                <Card.Title title={item.name} />
-                <Divider horizontalInset style={{marginBottom: 10}} />
-                <Card.Content>
-                  <Image
-                    style={{height: 200}}
-                    resizeMode="contain"
-                    source={{uri: item.images[0]}}
-                  />
-                </Card.Content>
-              </Card>
-            </Pressable>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </ScrollView> */}
-    </>
+          );
+        }}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
   );
 };
