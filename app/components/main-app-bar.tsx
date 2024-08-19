@@ -1,12 +1,15 @@
-import {Appbar, Text} from 'react-native-paper';
+import {Appbar, Text, useTheme} from 'react-native-paper';
 import {ToggleTheme} from './toggle-theme';
-import {apiServices} from '../store/slices/api-services-slice';
-import {useSelector} from 'react-redux';
 
 export const MainAppBar = () => {
+  const theme = useTheme();
   return (
     <Appbar.Header>
-      <Appbar.Content title="Market3" />
+      <Appbar.Content
+        color={theme.colors.primary}
+        titleStyle={{fontStyle: 'italic', fontWeight: 'bold'}}
+        title="Market3"
+      />
       <ToggleTheme />
     </Appbar.Header>
   );

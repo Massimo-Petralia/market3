@@ -12,7 +12,7 @@ import {
 } from 'react-native-paper';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
-import {UserStackNavigationProp} from '../../../navigation/navigation-types';
+import {MainTabsNavigationProp, RootStackNavigationProp, UserStackNavigationProp} from '../../../navigation/navigation-types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, {useEffect, useState} from 'react';
 
@@ -25,7 +25,7 @@ export const UserProfile = ({
 }) => {
   const [fabGroup, setFabGroup] = useState({open: false});
   const [isVisible, setMainFabVisibility] = useState<boolean>(true);
-  const navigation = useNavigation<UserStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const theme = useTheme();
   const defaultAvatar = require('../../../assets/images/user.png');
   const closeFabGroup = () => {
@@ -123,11 +123,19 @@ export const UserProfile = ({
               onPress: () => onLogout(),
             },
             {
+              icon: 'cart',
+              label: 'My cart',
+              onPress:(() => {
+                closeFabGroup();
+                navigation.navigate('MainTabs', {screen: 'Cart'});
+              })
+            },
+            {
               icon: 'pencil-box',
               label: 'Address',
               onPress: () => {
                 closeFabGroup();
-                navigation.navigate(Routes.MainTabs.UserStack.Address);
+                navigation.navigate('MainTabs', {screen: 'User', params:{screen:'Address'}});
               },
             },
             {
@@ -135,7 +143,7 @@ export const UserProfile = ({
               label: 'My products',
               onPress: () => {
                 closeFabGroup();
-                navigation.navigate(Routes.MainTabs.UserStack.MyProducts);
+                navigation.navigate('MainTabs', {screen: 'User', params:{screen:'My products'}});
               },
             },
           ]}

@@ -38,33 +38,33 @@ export const FormUserAddress = ({
     }
   }, [address]);
   return (
-    <View style={{marginHorizontal: 20}}>
+    <View style={{marginHorizontal: 20, marginVertical: 20}}>
       <View id="form-address">
-        <Text>Address</Text>
+        <Text>Address:</Text>
         <TextInput
           value={formValue.address}
           onChangeText={address => handleAddressChanges(address)}
           placeholder="Address"
         />
-        <Text>City</Text>
+        <Text>City:</Text>
         <TextInput
           value={formValue.city}
           onChangeText={city => handleCityChanges(city)}
           placeholder="City"
         />
-        <Text>State</Text>
+        <Text>State:</Text>
         <TextInput
           value={formValue.state}
           onChangeText={state => handleStateChanges(state)}
           placeholder="State"
         />
-        <Text>Country</Text>
+        <Text>Country:</Text>
         <TextInput
           value={formValue.country}
           onChangeText={country => handleCountryChanges(country)}
           placeholder="Country"
         />
-        <Text>Zip code</Text>
+        <Text>Zip code:</Text>
         <TextInput
           value={formValue.zipcode}
           onChangeText={zipcode => handleZipcodeChanges(zipcode)}

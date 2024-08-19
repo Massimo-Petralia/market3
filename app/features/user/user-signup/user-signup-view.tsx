@@ -97,8 +97,15 @@ export const UserSignup = ({
           </Pressable>
         </View>
         <Button
-           style={{ marginTop: 10, marginHorizontal:20}}
-          onPress={() => onSignup(formValue)}
+          style={{marginTop: 10, marginHorizontal: 20}}
+          onPress={() =>
+            onSignup({
+              ...formValue,
+              name:
+                formValue.name.charAt(0).toUpperCase() +
+                formValue.name.slice(1),
+            })
+          }
           mode="contained">
           Signup
         </Button>
