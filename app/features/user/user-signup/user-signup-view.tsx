@@ -97,7 +97,7 @@ export const UserSignup = ({
           </Pressable>
         </View>
         <Button
-          style={{alignSelf: 'center'}}
+           style={{ marginTop: 10, marginHorizontal:20}}
           onPress={() => onSignup(formValue)}
           mode="contained">
           Signup

@@ -15,7 +15,7 @@ export const DefaultUser: User = {
   avatar: {type: '', uri: ''},
   email: '',
   password: '',
-  cart: [],
+  cart: {},
   address: DefaultAddress,
 };
 

@@ -53,7 +53,7 @@ export const UserSignin = ({
           onChangeText={password => handlePasswordChanges(password)}
         />
         <Button
-          style={{alignSelf: 'center', marginTop: 10}}
+          style={{ marginTop: 10, marginHorizontal:20}}
           mode="contained"
           onPress={() =>
             onSignin({email: formValue.email, password: formValue.password})

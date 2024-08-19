@@ -3,6 +3,8 @@ import {DefaultUser} from '../../../models/default-values';
 import {
   LoadingState,
   Notification,
+  Product,
+  ProductList,
   User,
   UserAuth,
 } from '../../../models/models';
@@ -89,6 +91,24 @@ const userSlice = createSlice({
     },
     resetPatchSuccess : (state)=> {
       return {...state, patchSuccess: false}
+    },
+    updateCart : (state, action)=>{
+      console.log('Action: ', action.type)
+      if(state.loadingState === 'idle'){
+        return {...state, loadingState: 'loading'}
+      }
+    },
+    updateCartSuccess : (state, action: PayloadAction<Product[]>)=>{
+      const newCart:{[id: number]: Product} = action.payload.reduce((collection: {[id: number]: Product}, product) => {
+        collection[product.id!] = product;
+        return collection;
+      },{})
+      return {...state, user:  {...state.user, cart: newCart}, loadingState:'idle'}
+    },
+    updateCartFailed : (state, action: PayloadAction<string>)=>{
+      if (state.loadingState === 'loading') {
+        return {...state, loadingState: 'idle', patchSuccess: false};
+      }
     }
   },
 });
@@ -105,7 +125,10 @@ export const {
   patchUserProperty,
   patchUserPropertySuccess,
   patchUserPropertyFailed,
-  resetPatchSuccess
+  resetPatchSuccess,
+  updateCart,
+  updateCartSuccess,
+  updateCartFailed
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
@@ -192,6 +215,21 @@ class UserThunks {
           dispatch(patchUserPropertyFailed(error.message)),
         );
     };
+
+    updateCartThunk = (id: number, cart: Product[])=>async (dispatch: Dispatch) =>{
+      dispatch(updateCart(null)),
+      userService.updateCart(id, cart).then(async response =>{
+        const data = await response.json()
+        const notification: Notification = {
+          type: 'info',
+          text: 'cart updated !',
+        };
+        dispatch(updateCartSuccess(data.cart as Product[]))
+        dispatch(setNotification(notification))
+        dispatch(toggleNotification())
+
+      }).catch((error: Error)=> dispatch(updateCartFailed(error.message)))
+    }
 }
 
 export const userThunks = new UserThunks();

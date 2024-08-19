@@ -1,4 +1,4 @@
-import {User} from '../../models/models';
+import {Product, User} from '../../models/models';
 const usersURL = 'http://192.168.1.100:3000/users';
 const signinURL = 'http://192.168.1.100:3000/signin';
 class UserService {
@@ -32,6 +32,17 @@ updateUserProperty = (id: number,key :keyof User, value: Partial<User>)=> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({[key]: value})
+  })
+}
+
+updateCart = (id: number, cart: Product[])=>{
+  return fetch(`${usersURL}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({cart})
   })
 }
 
