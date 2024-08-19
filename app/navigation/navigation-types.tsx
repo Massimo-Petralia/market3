@@ -16,6 +16,7 @@ export type AuthStackParamList = {
 export type UserStackParamList = {
   [Routes.MainTabs.UserStack.Profile]: undefined;
   [Routes.MainTabs.UserStack.Address]: undefined;
+  [Routes.MainTabs.UserStack.MyProducts]: undefined
 };
 
 export type MainTabsParamList = {
