@@ -49,13 +49,13 @@ export const ProductsList = ({
         onFilteredSearch={onFilteredSearch}
       />
       <FlatList
-         style={{marginTop: 10}}
+         style={{marginTop: 5}}
         data={combinedData}
         renderItem={({item}) => {
           if (item.type === 'verticalList' && item.data.length !== 0) {
             return (
               <FlatList
-                style={{marginBottom: 10}}
+                style={{marginBottom: 5}}
                 data={item.data}
                 pagingEnabled
                 snapToInterval={width}
@@ -105,7 +105,7 @@ export const ProductsList = ({
           }
           return (
             <FlatList
-            style={{marginBottom:50}}
+            style={{ marginBottom:filteredProducts.length !== 0 ? 50 : 5}}
               ref={flatListRef}
               data={item.data}
               pagingEnabled
