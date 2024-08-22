@@ -1,8 +1,8 @@
 import {View} from 'react-native';
 import {Text, TextInput, Button, useTheme} from 'react-native-paper';
-import {Address, User} from '../../../../models/models';
+import {Address, User} from '../../../models/models';
 import {useState, useEffect} from 'react';
-import {DefaultAddress} from '../../../../models/default-values';
+import {DefaultAddress} from '../../../models/default-values';
 
 export const FormUserAddress = ({
   address,

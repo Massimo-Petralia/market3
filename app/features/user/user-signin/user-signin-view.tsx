@@ -4,8 +4,8 @@ import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
 import {AuthStackNavigationProp} from '../../../navigation/navigation-types';
 import React, {useState} from 'react';
-import {DefaultUser} from '../../../../models/default-values';
-import {LoadingState, User} from '../../../../models/models';
+import {DefaultUser} from '../../../models/default-values';
+import {LoadingState, User} from '../../../models/models';
 
 export const UserSignin = ({
   onSignin,

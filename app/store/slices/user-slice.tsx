@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {DefaultUser} from '../../../models/default-values';
+import {DefaultUser} from '../../models/default-values';
 import {
   LoadingState,
   Notification,
@@ -7,7 +7,7 @@ import {
   ProductList,
   User,
   UserAuth,
-} from '../../../models/models';
+} from '../../models/models';
 import {Dispatch} from '@reduxjs/toolkit';
 import {userService} from '../../services/user-service';
 import {setNotification, toggleNotification} from './alerts-slice';

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {MyProducts} from './my-products-view';
-import {Product} from '../../../../models/models';
+import {Product} from '../../../models/models';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../../../store/store';
 import {productListThunks} from '../../../store/slices/product-list-slice';

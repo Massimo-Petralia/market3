@@ -9,15 +9,20 @@ import {
   selectUserId,
   selectAccessToken,
 } from '../../../store/selectors/user-selectors';
-import {Product} from '../../../../models/models';
+import {Product} from '../../../models/models';
 import {
   selectProductDetail,
   selectLoadingState,
   selectIsDeleted,
 } from '../../../store/selectors/product-selectors';
 import React from 'react';
-import {useNavigation, useFocusEffect} from '@react-navigation/native';
-import {HomeStackNavigationProp} from '../../../navigation/navigation-types';
+import {useNavigation} from '@react-navigation/native';
+import {
+  HomeStackNavigationProp,
+  ProductRouteProp,
+} from '../../../navigation/navigation-types';
+import {useRoute} from '@react-navigation/native';
+
 export const FormProductPage = () => {
   const navigation = useNavigation<HomeStackNavigationProp>();
   const dispatch: AppDispatch = useDispatch();
@@ -26,6 +31,11 @@ export const FormProductPage = () => {
   const product = useSelector(selectProductDetail);
   const loadingState = useSelector(selectLoadingState);
   const isDeleted = useSelector(selectIsDeleted);
+  const route = useRoute<ProductRouteProp>();
+  const {productId, viewMode} = route.params || {
+    productId: null,
+    viewMode: 'edit',
+  };
   const onCreateProduct = (product: Product) => {
     dispatch(productThunks.createProductThunk({...product, userId}));
   };
@@ -48,6 +58,7 @@ export const FormProductPage = () => {
         loadingState={loadingState}
         isDeleted={isDeleted}
         onResetIsDeleted={onResetIsDeleted}
+        params={{productId, viewMode}}
       />
     </>
   );

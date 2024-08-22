@@ -22,3 +22,8 @@ export const selectMyProducts = createSelector(
   [selectProductList],
   ({myProducts}) => myProducts,
 );
+
+export const selectMainPagination = createSelector(
+  [selectProductList],
+  productList => productList.mainPagination
+)

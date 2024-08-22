@@ -1,6 +1,6 @@
 import {createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
-import {LoadingState, Notification, Product} from '../../../models/models';
-import {DefaultProduct} from '../../../models/default-values';
+import {LoadingState, Notification, Product} from '../../models/models';
+import {DefaultProduct} from '../../models/default-values';
 import {productService} from '../../services/product-service';
 import {setNotification, toggleNotification} from './alerts-slice';
 import { removeProduct } from './product-list-slice';

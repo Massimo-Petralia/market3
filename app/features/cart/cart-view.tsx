@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Button,
 } from 'react-native-paper';
-import {LoadingState, Product} from '../../../models/models';
+import {LoadingState, Product} from '../../models/models';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../navigation/navigation-types';
 import {useEffect, useState} from 'react';

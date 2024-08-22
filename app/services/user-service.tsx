@@ -1,4 +1,4 @@
-import {Product, User} from '../../models/models';
+import {Product, User} from '../models/models';
 const usersURL = 'http://192.168.1.101:3000/users';
 const signinURL = 'http://192.168.1.101:3000/signin';
 class UserService {

@@ -1,4 +1,4 @@
-import {Address, Product, User} from './models';
+import {Address, MainPagination, Product, User} from './models';
 
 export const DefaultAddress: Address = {
   address: '',
@@ -27,3 +27,8 @@ export const DefaultProduct: Product = {
   currency: '€',
   images: [],
 };
+
+export const DefaultMainPagination : MainPagination = {
+  page: 1,
+  lastPage: 0,
+}

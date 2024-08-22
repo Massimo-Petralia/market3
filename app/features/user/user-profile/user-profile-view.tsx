@@ -1,5 +1,5 @@
 import {View, StyleSheet, Pressable, ScrollView} from 'react-native';
-import {User} from '../../../../models/models';
+import {User} from '../../../models/models';
 import {
   Button,
   Card,

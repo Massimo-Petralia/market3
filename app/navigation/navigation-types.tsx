@@ -6,7 +6,7 @@ import {
 import Routes from './routes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MaterialBottomTabNavigationProp} from 'react-native-paper';
-import {ViewMode} from '../../models/models';
+import {ViewMode} from '../models/models';
 
 export type AuthStackParamList = {
   [Routes.Auth.Signin]: undefined;

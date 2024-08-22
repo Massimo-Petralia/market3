@@ -5,8 +5,8 @@ import {
 } from '../../../store/selectors/user-selectors';
 import {useSelector, useDispatch} from 'react-redux';
 import {resetPatchSuccess, userThunks} from '../../../store/slices/user-slice';
-import {Address} from '../../../../models/models';
-import {User} from '../../../../models/models';
+import {Address} from '../../../models/models';
+import {User} from '../../../models/models';
 import {AppDispatch} from '../../../store/store';
 import {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';

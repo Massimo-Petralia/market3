@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import {Text, Card, Button, useTheme} from 'react-native-paper';
-import {Product, ViewMode} from '../../../../models/models';
+import {Product, ViewMode} from '../../../models/models';
 import {ImagesPreview} from '../../../components/images-preview';
 
 export const ProductDetail = ({

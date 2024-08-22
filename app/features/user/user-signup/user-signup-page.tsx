@@ -1,5 +1,5 @@
 import {UserSignup} from './user-signup-view';
-import {User} from '../../../../models/models';
+import {User} from '../../../models/models';
 import {useDispatch, useSelector} from 'react-redux';
 import {userThunks, resetIsCreated} from '../../../store/slices/user-slice';
 import {AppDispatch} from '../../../store/store';

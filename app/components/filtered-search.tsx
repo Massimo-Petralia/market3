@@ -1,4 +1,4 @@
-import {LoadingState} from '../../models/models';
+import {LoadingState} from '../models/models';
 import {View, Pressable, StyleSheet, Dimensions} from 'react-native';
 import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
 import {useState} from 'react';
@@ -17,13 +17,6 @@ export const FilteredSearch = ({
   const {width} = Dimensions.get('window');
   const [text, setText] = useState<string>('');
 
-  if (loadingState === 'loading') {
-    return (
-      <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
   return (
     <View>
       <View

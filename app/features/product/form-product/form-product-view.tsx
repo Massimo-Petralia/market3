@@ -7,16 +7,25 @@ import {
   Menu,
   useTheme,
 } from 'react-native-paper';
-import {Currency, LoadingState, Product} from '../../../../models/models';
+import {
+  Currency,
+  LoadingState,
+  Product,
+  ViewMode,
+} from '../../../models/models';
 import {useEffect, useState} from 'react';
-import {DefaultProduct} from '../../../../models/default-values';
+import {DefaultProduct} from '../../../models/default-values';
 import {ImagesPreview} from '../../../components/images-preview';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {NotificationModal} from '../../../components/notification-modal';
-import {useRoute} from '@react-navigation/native';
-import {ProductRouteProp} from '../../../navigation/navigation-types';
+//import {useRoute} from '@react-navigation/native';
+//import {ProductRouteProp} from '../../../navigation/navigation-types';
 import {useSelector} from 'react-redux';
-import {selectProducts} from '../../../store/selectors/product-list-selectors';
+import {
+  selectProducts,
+  selectMyProducts,
+} from '../../../store/selectors/product-list-selectors';
+import {useFocusEffect} from '@react-navigation/native';
 
 export const FormProduct = ({
   onCreateProduct,
@@ -25,6 +34,7 @@ export const FormProduct = ({
   product,
   isDeleted,
   onResetIsDeleted,
+  params,
 }: {
   onCreateProduct: (product: Product) => void;
   onUpdateProduct: (product: Product) => void;
@@ -32,11 +42,11 @@ export const FormProduct = ({
   product: Product;
   isDeleted: boolean;
   onResetIsDeleted: () => void;
+  params: {productId: number | undefined; viewMode: ViewMode};
 }) => {
   const theme = useTheme();
-  const route = useRoute<ProductRouteProp>();
-  const {productId, viewMode} = route.params || {productId: null, viewMode: 'edit'};
   const products = useSelector(selectProducts);
+  const myProducts = useSelector(selectMyProducts);
 
   const [formProduct, setFormProduct] = useState<Product>(DefaultProduct);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -48,17 +58,23 @@ export const FormProduct = ({
   }, [product]);
 
   useEffect(() => {
-    setFormProduct(DefaultProduct);
+    if (params.productId) {
+      setFormProduct(products[params.productId]);
+    }
+  }, [params.productId]);
+
+  useEffect(() => {
+    if (params.productId) {
+      const myProduct = myProducts[params.productId];
+      setFormProduct(myProduct);
+    }
+  }, [myProducts]);
+
+  useEffect(() => {
     if (isDeleted === true) {
       onResetIsDeleted();
     }
   }, [isDeleted]);
-
-  useEffect(() => {
-    if (productId) {
-      setFormProduct(products[productId]);
-    }
-  }, [productId]);
 
   const updateFormProduct = (key: keyof Product, value: string | string[]) => {
     setFormProduct(previuosValue => ({...previuosValue, [key]: value}));
@@ -97,7 +113,7 @@ export const FormProduct = ({
   return (
     <ScrollView>
       <View id="form-product" style={{marginHorizontal: 20}}>
-        {formProduct.id ? (
+        {formProduct && formProduct.id ? (
           <View style={style.infoForm}>
             <Text variant="bodyLarge" style={{color: 'dodgerblue'}}>
               For add new product first{' '}
@@ -119,7 +135,7 @@ export const FormProduct = ({
         <TextInput
           style={{marginVertical: 5}}
           label="Description"
-          value={formProduct.description}
+          value={ formProduct.description}
           onChangeText={description => handleDescriptionChanges(description)}
         />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -188,7 +204,7 @@ export const FormProduct = ({
           </Menu>
         </View>
         <ImagesPreview
-          viewMode={viewMode}
+          viewMode={params.viewMode}
           imagesNode={formProduct.images}
           handleImagesChanges={handleImagesChanges}
         />
@@ -229,6 +245,7 @@ export const FormProduct = ({
               if (formProduct.id) {
                 onUpdateProduct(formProduct);
               }
+              console.log('form product id: ', formProduct.id)
             }}>
             Save
           </Button>

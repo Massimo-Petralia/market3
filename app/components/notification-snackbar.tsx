@@ -5,9 +5,8 @@ import {useTheme} from 'react-native-paper';
 import {
   selectNotification,
   selectIsVisible,
-  selectCompType,
 } from '../store/selectors/alerts-selectors';
-import {NotificationType} from '../../models/models';
+import {NotificationType} from '../models/models';
 import {useSelector, useDispatch} from 'react-redux';
 import {toggleNotification} from '../store/slices/alerts-slice';
 

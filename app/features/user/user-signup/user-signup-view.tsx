@@ -1,7 +1,7 @@
 import {Text, useTheme, TextInput, Button, Avatar} from 'react-native-paper';
 import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
-import {LoadingState, Notification, User} from '../../../../models/models';
-import {DefaultUser} from '../../../../models/default-values';
+import {LoadingState, Notification, User} from '../../../models/models';
+import {DefaultUser} from '../../../models/default-values';
 import React, {useState} from 'react';
 import Routes from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
