@@ -1,7 +1,7 @@
-import {Product} from '../../models/models';
+import {Product} from '../models/models';
 
-const productsURL = 'http://192.168.1.100:3000/products';
-const guardedProductUrl = 'http://192.168.1.100:3000/644/products';
+const productsURL = 'http://192.168.1.101:3000/products';
+const guardedProductUrl = 'http://192.168.1.101:3000/644/products';
 class ProductService {
   createProduct = (product: Product) => {
     return fetch(productsURL, {
@@ -37,8 +37,9 @@ class ProductService {
     })
   }
 
-  getProductList = () => {
-    return fetch(`${productsURL}/?_page=1&_limit=10`, {
+  getProductList = (page:number) => {
+    //console.log('page from service: ', page)
+    return fetch(`${productsURL}/?_page=${page}&_limit=10`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -55,6 +56,15 @@ class ProductService {
       },
     });
   };
+  getMyProducts= (userId: number) =>{
+    return fetch(`${productsURL}?userId=${userId}&_page=1&_limit=10`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+  }
 }
 
 export const productService = new ProductService();

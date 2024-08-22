@@ -14,6 +14,7 @@ export const Routes = {
       index: 'User',
       Address: 'Address',
       Profile: 'Profile',
+      MyProducts: 'My products'
     },
     
     Sell: 'Sell',

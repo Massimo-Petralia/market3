@@ -5,8 +5,8 @@ const selectProductList = (state: RootState) => state.productList;
 
 export const selectLoadingState = createSelector(
   [selectProductList],
-  (productList) => productList.loadingState
-)
+  productList => productList.loadingState,
+);
 
 export const selectProducts = createSelector(
   [selectProductList],
@@ -15,6 +15,15 @@ export const selectProducts = createSelector(
 
 export const selectFilteredProducts = createSelector(
   [selectProductList],
-  (productList) => productList.filteredProducts
-)
+  productList => productList.filteredProducts,
+);
 
+export const selectMyProducts = createSelector(
+  [selectProductList],
+  ({myProducts}) => myProducts,
+);
+
+export const selectMainPagination = createSelector(
+  [selectProductList],
+  productList => productList.mainPagination
+)

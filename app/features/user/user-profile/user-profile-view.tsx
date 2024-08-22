@@ -1,5 +1,5 @@
 import {View, StyleSheet, Pressable, ScrollView} from 'react-native';
-import {User} from '../../../../models/models';
+import {User} from '../../../models/models';
 import {
   Button,
   Card,
@@ -10,11 +10,11 @@ import {
   Portal,
   FAB,
 } from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import Routes from '../../../navigation/routes';
-import {UserStackNavigationProp} from '../../../navigation/navigation-types';
+import {MainTabsNavigationProp, RootStackNavigationProp, UserStackNavigationProp} from '../../../navigation/navigation-types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 export const UserProfile = ({
   onLogout,
@@ -24,12 +24,24 @@ export const UserProfile = ({
   userDetail: User;
 }) => {
   const [fabGroup, setFabGroup] = useState({open: false});
-  const navigation = useNavigation<UserStackNavigationProp>();
+  const [isVisible, setMainFabVisibility] = useState<boolean>(true);
+  const navigation = useNavigation<RootStackNavigationProp>();
   const theme = useTheme();
   const defaultAvatar = require('../../../assets/images/user.png');
   const closeFabGroup = () => {
     setFabGroup({open: false});
   };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      setMainFabVisibility(false);
+    });
+    return unsubscribe;
+  }, [navigation]);
+  useFocusEffect(
+    React.useCallback(() => {
+      setMainFabVisibility(true);
+    }, []),
+  );
   return (
     <View>
       <ScrollView style={{marginHorizontal: 20}}>
@@ -102,8 +114,8 @@ export const UserProfile = ({
         <FAB.Group
           style={{marginBottom: 80}}
           open={fabGroup.open}
-          visible
-          icon={!fabGroup.open ? 'menu':'menu-open'}
+          visible={isVisible}
+          icon={!fabGroup.open ? 'menu' : 'menu-open'}
           onStateChange={({open}) => setFabGroup({open})}
           actions={[
             {
@@ -111,11 +123,27 @@ export const UserProfile = ({
               onPress: () => onLogout(),
             },
             {
+              icon: 'cart',
+              label: 'My cart',
+              onPress:(() => {
+                closeFabGroup();
+                navigation.navigate('MainTabs', {screen: 'Cart'});
+              })
+            },
+            {
               icon: 'pencil-box',
               label: 'Address',
               onPress: () => {
                 closeFabGroup();
-                navigation.navigate(Routes.MainTabs.UserStack.Address);
+                navigation.navigate('MainTabs', {screen: 'User', params:{screen:'Address'}});
+              },
+            },
+            {
+              icon: 'view-list',
+              label: 'My products',
+              onPress: () => {
+                closeFabGroup();
+                navigation.navigate('MainTabs', {screen: 'User', params:{screen:'My products'}});
               },
             },
           ]}

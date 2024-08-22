@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {Cart} from './cart-view';
 import {selectCart, selectUserId, selectLoadingState} from '../../store/selectors/user-selectors';
 import {useSelector, useDispatch} from 'react-redux';
-import {ProductList} from '../../../models/models';
+import {ProductList} from '../../models/models';
 import {userThunks} from '../../store/slices/user-slice';
 import {AppDispatch} from '../../store/store';
 export const CartPage = () => {

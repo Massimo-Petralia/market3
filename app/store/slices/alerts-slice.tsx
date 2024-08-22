@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Notification} from '../../../models/models';
+import {Notification} from '../../models/models';
 
 const notification: Notification = {
   type: 'info',

@@ -1,7 +1,7 @@
 import {Text, useTheme, TextInput, Button, Avatar} from 'react-native-paper';
 import {ActivityIndicator, View, StyleSheet, Pressable} from 'react-native';
-import {LoadingState, Notification, User} from '../../../../models/models';
-import {DefaultUser} from '../../../../models/default-values';
+import {LoadingState, Notification, User} from '../../../models/models';
+import {DefaultUser} from '../../../models/default-values';
 import React, {useState} from 'react';
 import Routes from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
@@ -97,8 +97,15 @@ export const UserSignup = ({
           </Pressable>
         </View>
         <Button
-           style={{ marginTop: 10, marginHorizontal:20}}
-          onPress={() => onSignup(formValue)}
+          style={{marginTop: 10, marginHorizontal: 20}}
+          onPress={() =>
+            onSignup({
+              ...formValue,
+              name:
+                formValue.name.charAt(0).toUpperCase() +
+                formValue.name.slice(1),
+            })
+          }
           mode="contained">
           Signup
         </Button>

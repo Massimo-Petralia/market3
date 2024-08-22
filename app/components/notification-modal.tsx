@@ -1,7 +1,7 @@
 import {Text, useTheme, Portal, Dialog, Button} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../store/store';
-import {Product} from '../../models/models';
+import {Product} from '../models/models';
 import {productThunks} from '../store/slices/product-slice';
 import {selectAccessToken} from '../store/selectors/user-selectors';
 

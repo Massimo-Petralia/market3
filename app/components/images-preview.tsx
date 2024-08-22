@@ -6,8 +6,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Card, Divider, Text, useTheme} from 'react-native-paper';
 import {DotIndicator} from './dot-indicator';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {IsProductDetail} from '../navigation/navigation-types';
-import { ViewMode } from '../../models/models';
+import { ViewMode } from '../models/models';
 
 export const ImagesPreview = ({
   handleImagesChanges,

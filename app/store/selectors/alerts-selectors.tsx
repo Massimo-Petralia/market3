@@ -12,8 +12,3 @@ export const selectIsVisible = createSelector(
   [selectAlerts],
   alerts => alerts.isVisible,
 );
-
-export const selectCompType = createSelector(
-  [selectAlerts],
-  alerts => alerts.notification.compType
-)

@@ -3,7 +3,7 @@ import {ProductRouteProp} from '../../../navigation/navigation-types';
 import {ProductDetail} from './product-detail-view';
 import {useRoute} from '@react-navigation/native';
 import {selectProducts} from '../../../store/selectors/product-list-selectors';
-import {Product} from '../../../../models/models';
+import {Product} from '../../../models/models';
 import {AppDispatch} from '../../../store/store';
 import {userThunks} from '../../../store/slices/user-slice';
 import {

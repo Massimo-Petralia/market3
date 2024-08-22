@@ -28,7 +28,7 @@ export type Product = {
 };
 export type Currency = '€' | '$';
 
-export type NotificationType = 'info' | 'warning' ;
+export type NotificationType = 'info' | 'warning';
 
 export interface Notification {
   type: NotificationType;
@@ -42,6 +42,11 @@ export interface UserAuth {
 
 export type LoadingState = 'idle' | 'loading';
 
-export type ProductList = {[id: number]: Product}
+export type ProductList = {[id: number]: Product};
 
-export type ViewMode = 'presentation' | 'edit'
+export type ViewMode = 'presentation' | 'edit';
+
+export type MainPagination = {
+  page: number;
+  lastPage: number;
+};

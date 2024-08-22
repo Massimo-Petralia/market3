@@ -8,9 +8,10 @@ import {
   ActivityIndicator,
   Button,
 } from 'react-native-paper';
-import {LoadingState, Product} from '../../../models/models';
+import {LoadingState, Product} from '../../models/models';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../navigation/navigation-types';
+import {useEffect, useState} from 'react';
 
 export const Cart = ({
   cart,
@@ -23,6 +24,21 @@ export const Cart = ({
 }) => {
   const theme = useTheme();
   const navigation = useNavigation<RootStackNavigationProp>();
+  const [subtotal, setSubtotal] = useState<number>(0);
+  useEffect(() => {
+    if (cart.length !== 0) {
+      const subtotal = sumPrices(cart);
+      setSubtotal(subtotal);
+    }
+  }, [cart]);
+  const sumPrices = (cart: Product[]) => {
+    return cart
+      .map(elemet => Number(elemet.price))
+      .reduce((acc, price) => {
+        const subtotal = Number(acc) + Number(price);
+        return subtotal;
+      }, 0);
+  };
   if (loadingState === 'loading') {
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
@@ -32,27 +48,29 @@ export const Cart = ({
   }
   return (
     <View>
-      <Card
-        style={{marginHorizontal: 20}}
-        contentStyle={{
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-        }}>
-        <Card.Content>
-          <Text variant="bodyLarge">Summary</Text>
-          <Text>{`Total items: ${cart.length}`}</Text>
-          {/* <Text>{`Subtotal price: ${cart
-            .map(elemet => Number(elemet.price))
-            .reduce((acc,price, ) => {
-              const subtotal = Number(acc) + Number(price);
-              return subtotal;
-            },[])}${cart[0].currency}`}</Text> */}
-          {/* <Text>Shipping price: 5{cart[0].currency}</Text> */}
-        </Card.Content>
-        <Card.Actions>
-          <Button mode='contained'>Buy</Button>
-        </Card.Actions>
-      </Card>
+      {cart.length !== 0 ?
+            <Card
+            style={{marginHorizontal: 20}}
+            contentStyle={{
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              paddingBottom: 10
+            }}>
+            <Card.Content>
+              <Text>{`Total items: ${cart.length}`}</Text>
+              <Text>
+                Subtotal: {subtotal}
+                {cart[0].currency}
+              </Text>
+              <Text>Shipping price: 5{cart[0].currency}</Text>
+              <Text style={{fontWeight:'bold'}}>Total price: {subtotal+5}{cart[0].currency}</Text>
+            </Card.Content>
+            <Card.Actions>
+              <Button mode="contained">Buy</Button>
+            </Card.Actions>
+          </Card>
+      :null}
+
       <ScrollView style={{marginHorizontal: 20}}>
         {cart.length !== 0 ? (
           cart.map((product, index) => (
@@ -100,7 +118,7 @@ export const Cart = ({
                           params: {
                             productId: product.id,
                             viewMode: 'presentation',
-                            navigationFromCart: true
+                            navigationFromCart: true,
                           },
                         },
                       })
